@@ -74,7 +74,7 @@ struct DurationCard: View {
             .cornerRadius(Constants.CornerRadius.card)
             .overlay(
                 RoundedRectangle(cornerRadius: Constants.CornerRadius.card)
-                    .stroke(Constants.Colors.primaryBlue, lineWidth: 2)
+                    .stroke(Constants.Colors.primaryBlue, lineWidth: 3)
             )
             .shadow(
                 color: Constants.Shadow.color,
