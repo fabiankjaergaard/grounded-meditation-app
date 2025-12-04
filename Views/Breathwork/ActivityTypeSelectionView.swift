@@ -46,11 +46,11 @@ struct ActivityTypeSelectionView: View {
                     NavigationLink(destination: DurationSelectionView(activityType: .breathwork, onSelectDuration: { duration in
                         onComplete(.breathwork, duration)
                         dismiss()
-                    }, backgroundImage: "Breathworkcard")) {
+                    }, backgroundImage: "Breathworkcard1")) {
                         ActivityTypeCard(
                             title: Strings.ActivitySelection.breathworkTitle,
                             description: Strings.ActivitySelection.breathworkDescription,
-                            backgroundImage: "Breathworkcard"
+                            backgroundImage: "Breathworkcard1"
                         )
                     }
                     .buttonStyle(PlainButtonStyle())
@@ -89,7 +89,7 @@ struct ActivityTypeCard: View {
                         .resizable()
                         .scaledToFill()
                         .frame(height: 160)
-                        .offset(y: backgroundImage == "Meditationcard" ? 30 : (backgroundImage == "Breathworkcard" ? 40 : 0))
+                        .offset(y: backgroundImage == "Meditationcard" ? 30 : (backgroundImage == "Breathworkcard1" ? 40 : 0))
                         .clipped()
                 } else {
                     // Empty colored space for breathwork
