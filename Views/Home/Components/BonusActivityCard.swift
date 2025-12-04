@@ -17,12 +17,12 @@ struct BonusActivityCard: View {
                 // Icon
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
-                        .fill(Constants.Colors.accentYellow.opacity(0.2))
+                        .fill(Constants.Colors.accentOrange.opacity(0.1))
                         .frame(width: 56, height: 56)
 
                     Image(systemName: activity.icon)
                         .font(.system(size: 24))
-                        .foregroundColor(Constants.Colors.primaryBlue)
+                        .foregroundColor(Constants.Colors.accentOrange)
                 }
 
                 // Content
@@ -42,7 +42,7 @@ struct BonusActivityCard: View {
                 VStack(alignment: .trailing, spacing: 4) {
                     Text(activity.duration)
                         .font(Constants.Typography.caption)
-                        .foregroundColor(Constants.Colors.primaryBlue)
+                        .foregroundColor(Constants.Colors.accentOrange)
 
                     Image(systemName: "chevron.right")
                         .font(.system(size: 14))

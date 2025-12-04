@@ -22,7 +22,7 @@ struct DailyActivityCard: View {
                         .foregroundColor(
                             activity.isCompleted
                             ? Constants.Colors.textTertiary
-                            : Constants.Colors.primaryBlue
+                            : Constants.Colors.accentOrange
                         )
                         .tracking(1.0)
 
@@ -50,7 +50,7 @@ struct DailyActivityCard: View {
                         .fill(
                             activity.isCompleted
                             ? Color.gray.opacity(0.1)
-                            : Constants.Colors.primaryBlue.opacity(0.1)
+                            : Constants.Colors.accentOrange.opacity(0.1)
                         )
                         .frame(width: 48, height: 48)
 
@@ -59,7 +59,7 @@ struct DailyActivityCard: View {
                         .foregroundColor(
                             activity.isCompleted
                             ? .gray
-                            : Constants.Colors.primaryBlue
+                            : Constants.Colors.accentOrange
                         )
                 }
             }
@@ -74,7 +74,7 @@ struct DailyActivityCard: View {
                     .stroke(
                         activity.isCompleted
                         ? Constants.Colors.borderDefault
-                        : Constants.Colors.primaryBlue,
+                        : Constants.Colors.accentOrange,
                         lineWidth: 5
                     )
             )
@@ -84,7 +84,7 @@ struct DailyActivityCard: View {
                     .fill(
                         activity.isCompleted
                         ? Color.gray.opacity(0.3)
-                        : Constants.Colors.primaryBlue
+                        : Constants.Colors.accentOrange
                     )
                     .frame(width: 4)
                     .cornerRadius(2),

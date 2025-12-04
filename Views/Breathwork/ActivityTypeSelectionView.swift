@@ -116,7 +116,7 @@ struct ActivityTypeCard: View {
         .clipped()
         .overlay(
             RoundedRectangle(cornerRadius: Constants.CornerRadius.card)
-                .stroke(Constants.Colors.primaryBlue, lineWidth: 2)
+                .stroke(Constants.Colors.accentOrange, lineWidth: 5)
         )
         .shadow(
             color: Constants.Shadow.color,
