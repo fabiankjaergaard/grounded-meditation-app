@@ -14,9 +14,6 @@ struct ActivityTypeSelectionView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: Constants.Spacing.standard) {
-                Spacer()
-                    .frame(height: 40)
-
                 // Title
                 VStack(spacing: 8) {
                     Text("Välj aktivitet")
@@ -27,9 +24,10 @@ struct ActivityTypeSelectionView: View {
                         .font(Constants.Typography.body)
                         .foregroundColor(Constants.Colors.textSecondary)
                 }
+                .padding(.top, 20)
 
                 Spacer()
-                    .frame(height: 30)
+                    .frame(height: 24)
 
                 // Activity type options
                 VStack(spacing: 16) {
