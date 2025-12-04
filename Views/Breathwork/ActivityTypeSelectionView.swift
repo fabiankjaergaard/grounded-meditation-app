@@ -24,10 +24,10 @@ struct ActivityTypeSelectionView: View {
                         .font(Constants.Typography.body)
                         .foregroundColor(Constants.Colors.textSecondary)
                 }
-                .padding(.top, 20)
+                .padding(.top, 8)
 
                 Spacer()
-                    .frame(height: 24)
+                    .frame(height: 16)
 
                 // Activity type options
                 VStack(spacing: 16) {
