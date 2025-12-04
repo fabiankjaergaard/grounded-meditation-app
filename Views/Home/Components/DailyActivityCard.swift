@@ -75,7 +75,7 @@ struct DailyActivityCard: View {
                         activity.isCompleted
                         ? Constants.Colors.borderDefault
                         : Constants.Colors.primaryBlue,
-                        lineWidth: 3
+                        lineWidth: 4
                     )
             )
             .overlay(
