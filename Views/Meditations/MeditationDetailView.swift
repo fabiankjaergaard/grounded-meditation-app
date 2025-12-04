@@ -10,6 +10,7 @@ import SwiftUI
 struct MeditationDetailView: View {
     @Environment(\.dismiss) var dismiss
     let meditation: Meditation
+    @State private var showTimer = false
 
     var body: some View {
         ScrollView {
@@ -138,12 +139,11 @@ struct MeditationDetailView: View {
     // MARK: - Start Button
     private var startButton: some View {
         Button(action: {
-            // TODO: Start meditation timer/audio
-            print("Start meditation: \(meditation.id)")
+            showTimer = true
         }) {
             HStack {
                 Image(systemName: "play.fill")
-                Text("Starta meditation")
+                Text("Start Meditation")
             }
             .font(Constants.Typography.bodyBold)
             .foregroundColor(.white)
@@ -151,6 +151,12 @@ struct MeditationDetailView: View {
             .padding(.vertical, 16)
             .background(Constants.Colors.primaryBlue)
             .cornerRadius(Constants.CornerRadius.button)
+        }
+        .fullScreenCover(isPresented: $showTimer) {
+            MeditationTimerView(meditation: meditation) {
+                showTimer = false
+                dismiss()
+            }
         }
     }
 }

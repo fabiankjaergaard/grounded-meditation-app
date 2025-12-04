@@ -9,19 +9,41 @@ import SwiftUI
 
 struct MeditationTimerView: View {
     @Environment(\.dismiss) var dismiss
-    let meditation: MeditationType
+    let meditation: Meditation
     let onComplete: () -> Void
 
-    @State private var currentPhaseIndex = 0
+    @State private var currentPhase = 1
     @State private var timeRemaining: Int = 0
     @State private var totalPhaseTime: Int = 0
     @State private var isRunning = false
     @State private var timer: Timer?
     @State private var showExitConfirmation = false
 
-    var currentPhase: MeditationPhase? {
-        guard currentPhaseIndex < meditation.phases.count else { return nil }
-        return meditation.phases[currentPhaseIndex]
+    // Phase data for each meditation
+    private var phases: [(duration: Int, name: String, description: String)] {
+        if meditation.id == "dynamic" {
+            return [
+                (10, "Chaotic Breathing", "Breathe chaotically through the nose"),
+                (10, "Catharsis", "Explode! Let go of everything"),
+                (10, "The Mantra", "Jump and shout 'Hoo! Hoo! Hoo!'"),
+                (15, "Silence", "Stop! Freeze wherever you are"),
+                (15, "Celebration", "Dance and celebrate")
+            ]
+        } else if meditation.id == "kundalini" {
+            return [
+                (15, "Shaking", "Let your body shake from the feet up"),
+                (15, "Dancing", "Dance freely in any way you feel"),
+                (15, "Witnessing", "Sit still and observe"),
+                (15, "Stillness", "Lie down and be still")
+            ]
+        } else {
+            return [(10, "Meditation", "Breathe and relax")]
+        }
+    }
+
+    private var currentPhaseData: (duration: Int, name: String, description: String)? {
+        guard currentPhase > 0 && currentPhase <= phases.count else { return nil }
+        return phases[currentPhase - 1]
     }
 
     var progress: Double {
@@ -67,18 +89,18 @@ struct MeditationTimerView: View {
                 Spacer()
 
                 // Current phase info
-                if let phase = currentPhase {
+                if let phaseData = currentPhaseData {
                     VStack(spacing: 20) {
-                        Text("Phase \(currentPhaseIndex + 1) of \(meditation.phases.count)")
+                        Text("Phase \(currentPhase) of \(phases.count)")
                             .font(Constants.Typography.caption)
                             .foregroundColor(.white.opacity(0.8))
 
-                        Text(phase.name)
+                        Text(phaseData.name)
                             .font(Constants.Typography.largeTitle)
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
 
-                        Text(phase.description)
+                        Text(phaseData.description)
                             .font(Constants.Typography.body)
                             .foregroundColor(.white.opacity(0.9))
                             .multilineTextAlignment(.center)
@@ -117,7 +139,7 @@ struct MeditationTimerView: View {
 
                 // Control buttons
                 HStack(spacing: 20) {
-                    if currentPhaseIndex > 0 {
+                    if currentPhase > 1 {
                         Button(action: previousPhase) {
                             Image(systemName: "backward.fill")
                                 .font(.system(size: 24))
@@ -137,7 +159,7 @@ struct MeditationTimerView: View {
                             .clipShape(Circle())
                     }
 
-                    if currentPhaseIndex < meditation.phases.count - 1 {
+                    if currentPhase < phases.count {
                         Button(action: nextPhase) {
                             Image(systemName: "forward.fill")
                                 .font(.system(size: 24))
@@ -166,8 +188,8 @@ struct MeditationTimerView: View {
 
     // MARK: - Timer Methods
     private func setupTimer() {
-        if let phase = currentPhase {
-            totalPhaseTime = phase.duration * 60
+        if let phaseData = currentPhaseData {
+            totalPhaseTime = phaseData.duration * 60
             timeRemaining = totalPhaseTime
         }
     }
@@ -187,7 +209,7 @@ struct MeditationTimerView: View {
                 timeRemaining -= 1
             } else {
                 // Phase complete
-                if currentPhaseIndex < meditation.phases.count - 1 {
+                if currentPhase < phases.count {
                     nextPhase()
                 } else {
                     // Meditation complete
@@ -211,16 +233,16 @@ struct MeditationTimerView: View {
 
     private func nextPhase() {
         stopTimer()
-        if currentPhaseIndex < meditation.phases.count - 1 {
-            currentPhaseIndex += 1
+        if currentPhase < phases.count {
+            currentPhase += 1
             setupTimer()
         }
     }
 
     private func previousPhase() {
         stopTimer()
-        if currentPhaseIndex > 0 {
-            currentPhaseIndex -= 1
+        if currentPhase > 1 {
+            currentPhase -= 1
             setupTimer()
         }
     }
@@ -238,7 +260,7 @@ struct MeditationTimerView: View {
 }
 
 #Preview {
-    MeditationTimerView(meditation: .dynamic) {
+    MeditationTimerView(meditation: .dynamicMeditation) {
         print("Meditation completed")
     }
 }

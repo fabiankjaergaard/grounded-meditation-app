@@ -15,7 +15,7 @@ struct HomeView: View {
     @State private var showDailyQuote = false
     @State private var showDailyVideo = false
     @State private var showMeditationDetail = false
-    @State private var selectedMeditation: MeditationType?
+    @State private var selectedMeditation: Meditation?
     @State private var breathworkPatternKey = "morning"
 
     // MARK: - Body
@@ -194,9 +194,9 @@ struct HomeView: View {
     private func handleBonusActivityTap(_ activity: Activity) {
         // Determine which meditation to show based on activity ID
         if activity.id == "dynamic_meditation" {
-            selectedMeditation = .dynamic
+            selectedMeditation = .dynamicMeditation
         } else if activity.id == "kundalini_meditation" {
-            selectedMeditation = .kundalini
+            selectedMeditation = .kundaliniMeditation
         }
         showMeditationDetail = true
     }
