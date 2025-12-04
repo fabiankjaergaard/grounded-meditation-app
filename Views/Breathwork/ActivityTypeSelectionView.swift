@@ -33,7 +33,6 @@ struct ActivityTypeSelectionView: View {
                 // Activity type options
                 VStack(spacing: 16) {
                     ActivityTypeCard(
-                        icon: "sparkles",
                         title: "Meditation",
                         description: "Lugn och närvaro",
                         backgroundImage: "Card-background-meditation"
@@ -42,7 +41,6 @@ struct ActivityTypeSelectionView: View {
                     }
 
                     ActivityTypeCard(
-                        icon: "wind",
                         title: "Breathwork",
                         description: "Andningsövningar",
                         backgroundImage: nil
@@ -70,7 +68,6 @@ struct ActivityTypeSelectionView: View {
 
 // MARK: - Activity Type Card
 struct ActivityTypeCard: View {
-    let icon: String
     let title: String
     let description: String
     let backgroundImage: String?
@@ -95,39 +92,33 @@ struct ActivityTypeCard: View {
                 }
 
                 // White content section at bottom
-                HStack(spacing: 16) {
-                    // Icon
-                    ZStack {
-                        Circle()
-                            .fill(Constants.Colors.primaryBlue.opacity(0.1))
-                            .frame(width: 56, height: 56)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(Constants.Colors.textPrimary)
 
-                        Image(systemName: icon)
-                            .font(.system(size: 24))
-                            .foregroundColor(Constants.Colors.primaryBlue)
-                    }
-
-                    // Content
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(title)
-                            .font(Constants.Typography.bodyBold)
-                            .foregroundColor(Constants.Colors.textPrimary)
-
-                        Text(description)
-                            .font(Constants.Typography.subheadline)
-                            .foregroundColor(Constants.Colors.textSecondary)
-                    }
-
-                    Spacer()
-
-                    Image(systemName: Constants.Icons.chevronRight)
-                        .foregroundColor(Constants.Colors.textTertiary)
+                    Text(description)
+                        .font(Constants.Typography.body)
+                        .foregroundColor(Constants.Colors.textSecondary)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(Constants.Spacing.standard)
                 .background(Color.white)
             }
             .cornerRadius(Constants.CornerRadius.card)
             .clipped()
+            .overlay(
+                RoundedRectangle(cornerRadius: Constants.CornerRadius.card)
+                    .stroke(Constants.Colors.primaryBlue, lineWidth: 2)
+            )
+            .overlay(
+                // Accent bar on left
+                Rectangle()
+                    .fill(Constants.Colors.primaryBlue)
+                    .frame(width: 4)
+                    .cornerRadius(2),
+                alignment: .leading
+            )
             .shadow(
                 color: Constants.Shadow.color,
                 radius: Constants.Shadow.radius,
@@ -149,10 +140,9 @@ enum ActivityType {
     }
 }
 
-#Preview("Meditation Card") {
-    VStack {
+#Preview("Activity Cards") {
+    VStack(spacing: 16) {
         ActivityTypeCard(
-            icon: "sparkles",
             title: "Meditation",
             description: "Lugn och närvaro",
             backgroundImage: "Card-background-meditation"
@@ -161,7 +151,6 @@ enum ActivityType {
         }
 
         ActivityTypeCard(
-            icon: "wind",
             title: "Breathwork",
             description: "Andningsövningar",
             backgroundImage: nil
