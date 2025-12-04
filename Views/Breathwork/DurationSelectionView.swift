@@ -31,13 +31,10 @@ struct DurationSelectionView: View {
                 }
 
                 Spacer()
-                    .frame(height: 40)
+                    .frame(height: 24)
 
                 // Duration options
-                LazyVGrid(columns: [
-                    GridItem(.flexible()),
-                    GridItem(.flexible())
-                ], spacing: 16) {
+                VStack(spacing: 12) {
                     ForEach(durations, id: \.self) { duration in
                         DurationCard(duration: duration) {
                             onSelectDuration(duration)
@@ -46,6 +43,7 @@ struct DurationSelectionView: View {
                 }
 
                 Spacer()
+                    .frame(minHeight: 20)
             }
             .padding(Constants.Spacing.standard)
             .background(
@@ -74,33 +72,41 @@ struct DurationCard: View {
 
     var body: some View {
         Button(action: onTap) {
-            VStack(spacing: 16) {
+            HStack(spacing: 16) {
                 // Clock icon
                 ZStack {
                     Circle()
                         .fill(Constants.Colors.primaryBlue.opacity(0.1))
-                        .frame(width: 64, height: 64)
+                        .frame(width: 48, height: 48)
 
                     Image(systemName: Constants.Icons.clock)
-                        .font(.system(size: 28))
+                        .font(.system(size: 20))
                         .foregroundColor(Constants.Colors.primaryBlue)
                 }
 
                 // Duration text
-                VStack(spacing: 4) {
+                HStack(spacing: 6) {
                     Text("\(duration)")
-                        .font(.system(size: 32, weight: .bold))
+                        .font(.system(size: 24, weight: .bold))
                         .foregroundColor(Constants.Colors.textPrimary)
 
                     Text("minuter")
-                        .font(Constants.Typography.subheadline)
+                        .font(Constants.Typography.body)
                         .foregroundColor(Constants.Colors.textSecondary)
                 }
+
+                Spacer()
+
+                Image(systemName: Constants.Icons.chevronRight)
+                    .foregroundColor(Constants.Colors.textTertiary)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, Constants.Spacing.standard)
+            .padding(16)
             .background(Color.white)
             .cornerRadius(Constants.CornerRadius.card)
+            .overlay(
+                RoundedRectangle(cornerRadius: Constants.CornerRadius.card)
+                    .stroke(Constants.Colors.primaryBlue, lineWidth: 2)
+            )
             .shadow(
                 color: Constants.Shadow.color,
                 radius: Constants.Shadow.radius,
