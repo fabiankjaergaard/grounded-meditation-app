@@ -89,7 +89,7 @@ struct ActivityTypeCard: View {
                         .resizable()
                         .scaledToFill()
                         .frame(height: 160)
-                        .offset(y: backgroundImage == "Meditationcard" ? 30 : (backgroundImage == "Breathworkcard" ? -40 : 0))
+                        .offset(y: backgroundImage == "Meditationcard" ? 30 : (backgroundImage == "Breathworkcard" ? 40 : 0))
                         .clipped()
                 } else {
                     // Empty colored space for breathwork
