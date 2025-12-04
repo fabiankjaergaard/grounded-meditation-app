@@ -48,35 +48,14 @@ struct DailyVideoView: View {
     // MARK: - Video Section
     private var videoSection: some View {
         VStack(spacing: 12) {
-            // Video placeholder (replace with YouTube player)
-            ZStack {
-                RoundedRectangle(cornerRadius: Constants.CornerRadius.card)
-                    .fill(Color.black.opacity(0.1))
-                    .aspectRatio(16/9, contentMode: .fit)
-
-                VStack(spacing: 8) {
-                    Image(systemName: Constants.Icons.video)
-                        .font(.system(size: 48))
-                        .foregroundColor(Constants.Colors.primaryBlue)
-
-                    Text("Reflections of Life")
-                        .font(Constants.Typography.bodyBold)
-                        .foregroundColor(Constants.Colors.textPrimary)
-
-                    Text("YouTube Video Player")
-                        .font(Constants.Typography.caption)
-                        .foregroundColor(Constants.Colors.textSecondary)
-
-                    Text("ID: \(Constants.VideoIDs.dailyReflection)")
-                        .font(Constants.Typography.caption)
-                        .foregroundColor(Constants.Colors.textTertiary)
-                }
-            }
-
-            Text("Video kommer laddas här med YouTube iframe")
-                .font(Constants.Typography.caption)
-                .foregroundColor(Constants.Colors.textSecondary)
-                .italic()
+            // YouTube Player
+            YouTubePlayerView(videoID: viewModel.videoId)
+                .aspectRatio(16/9, contentMode: .fit)
+                .cornerRadius(Constants.CornerRadius.card)
+                .overlay(
+                    RoundedRectangle(cornerRadius: Constants.CornerRadius.card)
+                        .stroke(Constants.Colors.borderLight, lineWidth: 1)
+                )
         }
     }
 
@@ -104,7 +83,7 @@ struct DailyVideoView: View {
                     .foregroundColor(Constants.Colors.textSecondary)
                     .lineSpacing(4)
 
-                Link(destination: URL(string: "https://www.youtube.com/watch?v=\(Constants.VideoIDs.dailyReflection)")!) {
+                Link(destination: URL(string: "https://www.youtube.com/watch?v=\(viewModel.videoId)")!) {
                     HStack {
                         Text("Se på YouTube")
                         Image(systemName: "arrow.up.right")
@@ -206,7 +185,11 @@ class DailyVideoViewModel: ObservableObject {
     @Published var isInfoExpanded: Bool = false
 
     private let storageManager = StorageManager.shared
-    private let videoId = Constants.VideoIDs.dailyReflection
+    let videoId: String
+
+    init() {
+        self.videoId = Constants.VideoIDs.getDailyReflectionVideo()
+    }
 
     func loadReflection() {
         if let existingReflection = storageManager.getReflection(for: videoId) {

@@ -11,6 +11,7 @@ import Combine
 struct ProfileView: View {
     @StateObject private var viewModel = ProfileViewModel()
     @State private var showSettings = false
+    @State private var showResetAlert = false
 
     var body: some View {
         NavigationStack {
@@ -34,6 +35,14 @@ struct ProfileView: View {
             .navigationBarHidden(true)
             .sheet(isPresented: $showSettings) {
                 SettingsView()
+            }
+            .alert("Reset dagens aktiviteter?", isPresented: $showResetAlert) {
+                Button("Avbryt", role: .cancel) { }
+                Button("Reset", role: .destructive) {
+                    viewModel.resetTodaysActivities()
+                }
+            } message: {
+                Text("Detta kommer att ta bort alla checkmarkeringar för dagens aktiviteter.")
             }
         }
     }
@@ -136,6 +145,11 @@ struct ProfileView: View {
             OptionRow(icon: "lock.fill", title: "Integritet") {
                 print("Navigate to privacy")
             }
+
+            // Temporary reset button for testing
+            OptionRow(icon: "arrow.counterclockwise.circle.fill", title: "🔧 Reset dagens aktiviteter") {
+                showResetAlert = true
+            }
         }
     }
 }
@@ -196,6 +210,10 @@ class ProfileViewModel: ObservableObject {
 
     init() {
         self.userData = StorageManager.shared.getUserData() ?? UserData()
+    }
+
+    func resetTodaysActivities() {
+        StorageManager.shared.resetTodaysActivities()
     }
 }
 

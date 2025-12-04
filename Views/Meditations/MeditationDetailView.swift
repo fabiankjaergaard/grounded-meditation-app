@@ -11,15 +11,11 @@ struct MeditationDetailView: View {
     @Environment(\.dismiss) var dismiss
     let meditation: Meditation
     @State private var showTimer = false
+    @State private var isPhasesExpanded = false
 
     var body: some View {
         ScrollView {
             VStack(spacing: Constants.Spacing.standard) {
-                // Test text
-                Text("TEST - Meditation: \(meditation.title)")
-                    .font(.largeTitle)
-                    .foregroundColor(.red)
-
                 // Header image/icon
                 headerSection
 
@@ -52,11 +48,6 @@ struct MeditationDetailView: View {
                 }
             }
         }
-        .onAppear {
-            print("🎯 MeditationDetailView appeared with meditation: \(meditation.id)")
-            print("📋 Meditation title: \(meditation.title)")
-            print("📋 Meditation description: \(meditation.description)")
-        }
     }
 
     // MARK: - Header Section
@@ -69,10 +60,12 @@ struct MeditationDetailView: View {
                 .clipped()
                 .cornerRadius(Constants.CornerRadius.card)
 
-            Image(systemName: meditation.id == "dynamic" ? "bolt.fill" : "sparkles")
-                .font(.system(size: 72))
-                .foregroundColor(.white.opacity(0.9))
+            Image("Timeovermeditations")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 350)
         }
+        .frame(height: 200)
     }
 
     // MARK: - Title Section
@@ -115,41 +108,93 @@ struct MeditationDetailView: View {
 
     // MARK: - Dynamic Instructions
     private var dynamicInstructionsSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Fem faser")
-                .font(Constants.Typography.bodyBold)
-                .foregroundColor(Constants.Colors.textPrimary)
+        VStack(alignment: .leading, spacing: 0) {
+            Button(action: {
+                // Haptic feedback
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
 
-            VStack(alignment: .leading, spacing: 12) {
-                PhaseRow(number: 1, duration: "10 min", title: "Kaotisk andning", description: "Andas kaotiskt genom näsan, koncentrera dig på utandningen")
-                PhaseRow(number: 2, duration: "10 min", title: "Catharsis", description: "Släpp lös! Låt kroppen göra vad den vill")
-                PhaseRow(number: 3, duration: "10 min", title: "Mantra", description: "Hoppa med armarna uppåt och ropa 'HOO!'")
-                PhaseRow(number: 4, duration: "15 min", title: "Stillhet", description: "Stanna kvar precis som du är, helt stilla")
-                PhaseRow(number: 5, duration: "15 min", title: "Celebration", description: "Dansa och fira livet!")
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    isPhasesExpanded.toggle()
+                }
+            }) {
+                HStack {
+                    Text("Fem faser")
+                        .font(Constants.Typography.bodyBold)
+                        .foregroundColor(Constants.Colors.textPrimary)
+
+                    Spacer()
+
+                    Image(systemName: isPhasesExpanded ? "chevron.up" : "chevron.down")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(Constants.Colors.textSecondary)
+                }
+                .padding(Constants.Spacing.standard)
+            }
+            .buttonStyle(PlainButtonStyle())
+
+            if isPhasesExpanded {
+                VStack(alignment: .leading, spacing: 0) {
+                    Divider()
+                        .padding(.horizontal, Constants.Spacing.standard)
+
+                    VStack(alignment: .leading, spacing: 16) {
+                        PhaseRow(number: 1, duration: "10 min", title: "Kaotisk andning", description: "Andas kaotiskt genom näsan, koncentrera dig på utandningen")
+                        PhaseRow(number: 2, duration: "10 min", title: "Catharsis", description: "Släpp lös! Låt kroppen göra vad den vill")
+                        PhaseRow(number: 3, duration: "10 min", title: "Mantra", description: "Hoppa med armarna uppåt och ropa 'HOO!'")
+                        PhaseRow(number: 4, duration: "15 min", title: "Stillhet", description: "Stanna kvar precis som du är, helt stilla")
+                        PhaseRow(number: 5, duration: "15 min", title: "Celebration", description: "Dansa och fira livet!")
+                    }
+                    .padding(Constants.Spacing.standard)
+                }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(Constants.Spacing.standard)
         .background(Color.white)
         .cornerRadius(Constants.CornerRadius.card)
     }
 
     // MARK: - Kundalini Instructions
     private var kundaliniInstructionsSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Fyra faser")
-                .font(Constants.Typography.bodyBold)
-                .foregroundColor(Constants.Colors.textPrimary)
+        VStack(alignment: .leading, spacing: 0) {
+            Button(action: {
+                // Haptic feedback
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
 
-            VStack(alignment: .leading, spacing: 12) {
-                PhaseRow(number: 1, duration: "15 min", title: "Skakningar", description: "Stå och låt hela kroppen skaka, känn energin röra sig uppåt")
-                PhaseRow(number: 2, duration: "15 min", title: "Dans", description: "Dansa precis som du känner för")
-                PhaseRow(number: 3, duration: "15 min", title: "Stillhet", description: "Sitt eller stå stilla och observera")
-                PhaseRow(number: 4, duration: "15 min", title: "Ligg ner", description: "Lägg dig ner och var stilla")
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    isPhasesExpanded.toggle()
+                }
+            }) {
+                HStack {
+                    Text("Fyra faser")
+                        .font(Constants.Typography.bodyBold)
+                        .foregroundColor(Constants.Colors.textPrimary)
+
+                    Spacer()
+
+                    Image(systemName: isPhasesExpanded ? "chevron.up" : "chevron.down")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(Constants.Colors.textSecondary)
+                }
+                .padding(Constants.Spacing.standard)
+            }
+            .buttonStyle(PlainButtonStyle())
+
+            if isPhasesExpanded {
+                VStack(alignment: .leading, spacing: 0) {
+                    Divider()
+                        .padding(.horizontal, Constants.Spacing.standard)
+
+                    VStack(alignment: .leading, spacing: 16) {
+                        PhaseRow(number: 1, duration: "15 min", title: "Skakningar", description: "Stå och låt hela kroppen skaka, känn energin röra sig uppåt")
+                        PhaseRow(number: 2, duration: "15 min", title: "Dans", description: "Dansa precis som du känner för")
+                        PhaseRow(number: 3, duration: "15 min", title: "Stillhet", description: "Sitt eller stå stilla och observera")
+                        PhaseRow(number: 4, duration: "15 min", title: "Ligg ner", description: "Lägg dig ner och var stilla")
+                    }
+                    .padding(Constants.Spacing.standard)
+                }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(Constants.Spacing.standard)
         .background(Color.white)
         .cornerRadius(Constants.CornerRadius.card)
     }
@@ -157,6 +202,9 @@ struct MeditationDetailView: View {
     // MARK: - Start Button
     private var startButton: some View {
         Button(action: {
+            // Haptic feedback
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
             showTimer = true
         }) {
             HStack {
@@ -188,34 +236,28 @@ struct PhaseRow: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            // Number circle
-            ZStack {
-                Circle()
-                    .fill(Constants.Colors.primaryBlue.opacity(0.1))
-                    .frame(width: 32, height: 32)
-
-                Text("\(number)")
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(Constants.Colors.primaryBlue)
-            }
+            // Number
+            Text("\(number)")
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(Constants.Colors.textSecondary)
+                .frame(width: 20)
 
             // Content
             VStack(alignment: .leading, spacing: 4) {
-                HStack {
+                HStack(alignment: .firstTextBaseline) {
                     Text(title)
-                        .font(Constants.Typography.subheadline)
-                        .fontWeight(.semibold)
+                        .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(Constants.Colors.textPrimary)
 
                     Spacer()
 
                     Text(duration)
-                        .font(Constants.Typography.caption)
+                        .font(.system(size: 13, weight: .regular))
                         .foregroundColor(Constants.Colors.textTertiary)
                 }
 
                 Text(description)
-                    .font(Constants.Typography.caption)
+                    .font(.system(size: 14, weight: .regular))
                     .foregroundColor(Constants.Colors.textSecondary)
                     .lineSpacing(2)
             }

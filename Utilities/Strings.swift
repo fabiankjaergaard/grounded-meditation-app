@@ -60,7 +60,7 @@ struct Strings {
     // MARK: - Daily Activities
     struct Activities {
         static let morningLabel = "MORNING"
-        static let morningTitle = "Morning Breathing"
+        static let morningTitle = "Morning Grounding"
         static let morningSubtitle = "Activate body & mind"
 
         static let middayLabel = "MIDDAY"
@@ -68,7 +68,7 @@ struct Strings {
         static let middaySubtitle = "Meditation + daily quote"
 
         static let eveningLabel = "EVENING"
-        static let eveningTitle = "Daily Reflection"
+        static let eveningTitle = "Evening Reflections"
         static let eveningSubtitle = "Reflections of Life"
 
         // Bonus activities

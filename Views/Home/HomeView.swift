@@ -16,16 +16,31 @@ struct HomeView: View {
     @State private var showDailyVideo = false
     @State private var selectedMeditation: Meditation?
     @State private var breathworkPatternKey = "morning"
+    @State private var scrollOffset: CGFloat = 0
 
     // MARK: - Body
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 0) {
-                    headerSection
-                    dailyJourneySection
-                    bonusSection
+                ZStack(alignment: .top) {
+                    GeometryReader { geometry in
+                        Color.clear.preference(
+                            key: ScrollOffsetPreferenceKey.self,
+                            value: geometry.frame(in: .named("scroll")).minY
+                        )
+                    }
+                    .frame(height: 0)
+
+                    VStack(spacing: 0) {
+                        headerSection
+                        dailyJourneySection
+                        bonusSection
+                    }
                 }
+            }
+            .coordinateSpace(name: "scroll")
+            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                scrollOffset = value
             }
             .ignoresSafeArea(edges: .top)
             .background(Constants.Colors.backgroundBeige)
@@ -71,11 +86,12 @@ struct HomeView: View {
     // MARK: - Header Section
     private var headerSection: some View {
         ZStack {
-            // Background image
+            // Background image with parallax
             Image("Blue-background")
                 .resizable()
                 .scaledToFill()
                 .frame(height: 320)
+                .offset(y: scrollOffset > 0 ? -scrollOffset * 0.5 : 0)
                 .clipped()
 
             VStack(spacing: Constants.Spacing.md) {
@@ -126,8 +142,8 @@ struct HomeView: View {
                             if index < viewModel.dailyActivities.count - 1 {
                                 Rectangle()
                                     .fill(activity.isCompleted ? Constants.Colors.primaryBlue : Color.gray.opacity(0.2))
-                                    .frame(width: 4, height: 78)
-                                    .offset(y: 51) // Börjar vid botten av cirkel (y:12) och slutar vid toppen av nästa (y:-12)
+                                    .frame(width: 4, height: 97)
+                                    .offset(y: 62)
                             }
 
                             // Prick
@@ -177,6 +193,12 @@ struct HomeView: View {
 
     // MARK: - Actions
     private func handleActivityTap(_ activity: Activity) {
+        // Success haptic when completing activity
+        if !activity.isCompleted {
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
+        }
+
         switch activity.type {
         case .breathwork, .meditation:
             // Show activity type selection for morning activity
@@ -189,16 +211,21 @@ struct HomeView: View {
     }
 
     private func handleBonusActivityTap(_ activity: Activity) {
-        print("🔍 Bonus activity tapped: \(activity.id)")
         // Determine which meditation to show based on activity ID
         if activity.id == "dynamic_meditation" {
-            print("✅ Setting Dynamic Meditation")
             selectedMeditation = .dynamicMeditation
         } else if activity.id == "kundalini_meditation" {
-            print("✅ Setting Kundalini Meditation")
             selectedMeditation = .kundaliniMeditation
         }
-        print("🎯 Selected meditation: \(String(describing: selectedMeditation))")
+    }
+}
+
+// MARK: - Scroll Offset Preference Key
+struct ScrollOffsetPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }
 

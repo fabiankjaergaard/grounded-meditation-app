@@ -12,7 +12,12 @@ struct BonusActivityCard: View {
     let onTap: () -> Void
 
     var body: some View {
-        Button(action: onTap) {
+        Button(action: {
+            // Haptic feedback
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+            onTap()
+        }) {
             HStack(spacing: 16) {
                 // Icon
                 ZStack {

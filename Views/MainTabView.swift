@@ -48,6 +48,11 @@ struct MainTabView: View {
                 .tag(4)
         }
         .accentColor(Constants.Colors.primaryBlue)
+        .onChange(of: selectedTab) { oldValue, newValue in
+            // Haptic feedback when changing tabs
+            let generator = UISelectionFeedbackGenerator()
+            generator.selectionChanged()
+        }
     }
 }
 

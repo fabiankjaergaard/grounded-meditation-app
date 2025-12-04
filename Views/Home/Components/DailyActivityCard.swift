@@ -12,7 +12,12 @@ struct DailyActivityCard: View {
     let onTap: () -> Void
 
     var body: some View {
-        Button(action: onTap) {
+        Button(action: {
+            // Haptic feedback
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+            onTap()
+        }) {
             HStack(spacing: 16) {
                 // Content
                 VStack(alignment: .leading, spacing: 4) {
@@ -47,37 +52,21 @@ struct DailyActivityCard: View {
                 // Icon
                 ZStack {
                     if activity.id == "morning_breath" {
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(
-                                activity.isCompleted
-                                ? Color.gray.opacity(0.1)
-                                : Constants.Colors.accentOrange.opacity(0.1)
-                            )
-                            .frame(width: 80, height: 80)
-
-                        Image("Coffe1")
+                        Image("Coffe2")
                             .resizable()
-                            .scaledToFit()
+                            .scaledToFill()
                             .frame(width: 80, height: 80)
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                             .opacity(activity.isCompleted ? 0.5 : 1.0)
                     } else if activity.id == "midday_reset" {
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(
-                                activity.isCompleted
-                                ? Color.gray.opacity(0.1)
-                                : Constants.Colors.accentOrange.opacity(0.1)
-                            )
-                            .frame(width: 80, height: 80)
-
-                        Image("Sun")
+                        Image("Sun1")
                             .resizable()
-                            .scaledToFit()
+                            .scaledToFill()
                             .frame(width: 80, height: 80)
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                             .opacity(activity.isCompleted ? 0.5 : 1.0)
                     } else if activity.id == "evening_reflection" {
-                        Image("Star")
+                        Image("Star1")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 80, height: 80)

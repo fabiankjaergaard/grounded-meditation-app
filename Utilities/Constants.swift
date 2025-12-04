@@ -103,7 +103,23 @@ enum Constants {
 
     // MARK: - YouTube Video IDs
     enum VideoIDs {
-        static let dailyReflection = "oGDLVkYKgAo" // Reflections of Life
+        // Reflections of Life videos - replace with actual video IDs from the channel
+        static let reflectionsOfLife = [
+            "oGDLVkYKgAo",  // Example video 1
+            "KdQbb3iQczc",  // Example video 2
+            "yT8nMB03Ij4",  // Example video 3
+            "JjZMjr4J2yU",  // Example video 4
+            "1wJnK6FrT3A",  // Example video 5
+            "rB8xr7qXZhQ",  // Example video 6
+            "3HH_0LKFD70"   // Example video 7
+        ]
+
+        // Get daily video based on date
+        static func getDailyReflectionVideo() -> String {
+            let dayOfYear = Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 0
+            let index = dayOfYear % reflectionsOfLife.count
+            return reflectionsOfLife[index]
+        }
 
         // Breathwork videos (5, 10, 15, 20 min)
         static let morningBreath5min = "5min_video_id"

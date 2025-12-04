@@ -31,5 +31,8 @@ struct TimelineView: View {
 }
 
 #Preview {
-    TimelineView(isCompleted: true)
+    VStack(spacing: 20) {
+        TimelineView(isCompleted: true)
+        TimelineView(isCompleted: false)
+    }
 }

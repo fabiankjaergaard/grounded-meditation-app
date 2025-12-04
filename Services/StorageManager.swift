@@ -187,6 +187,14 @@ class StorageManager {
         }
     }
 
+    // MARK: - Reset Daily Activities (for testing)
+    func resetTodaysActivities() {
+        let dateString = Date().dateString
+        let key = Keys.completedActivitiesPrefix + dateString
+        defaults.removeObject(forKey: key)
+        updateLastActiveDate(Date().addingTimeInterval(-86400)) // Set to yesterday to force refresh
+    }
+
     // MARK: - Clear All Data (for testing/logout)
     func clearAllData() {
         defaults.removeObject(forKey: Keys.userData)
