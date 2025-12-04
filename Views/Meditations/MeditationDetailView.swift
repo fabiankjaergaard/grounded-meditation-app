@@ -39,6 +39,17 @@ struct MeditationDetailView: View {
         .background(Constants.Colors.backgroundBeige)
         .navigationTitle(meditation.title)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "xmark")
+                        .foregroundColor(Constants.Colors.textPrimary)
+                }
+            }
+        }
+        .onAppear {
+            print("🎯 MeditationDetailView appeared with meditation: \(meditation.id)")
+        }
     }
 
     // MARK: - Header Section
