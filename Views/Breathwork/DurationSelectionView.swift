@@ -20,18 +20,14 @@ struct DurationSelectionView: View {
             VStack(spacing: 8) {
                 Text(Strings.DurationSelection.title)
                     .font(Constants.Typography.title)
-                    .foregroundColor(Color(hex: "#1A1A1A"))
+                    .foregroundColor(.white)
+                    .shadow(color: Color.black.opacity(0.3), radius: 2, x: 0, y: 2)
 
                 Text(Strings.DurationSelection.subtitle(activityType: activityType == .meditation ? "meditation" : "breathwork"))
                     .font(Constants.Typography.body)
-                    .foregroundColor(Color(hex: "#1A1A1A").opacity(0.7))
+                    .foregroundColor(.white)
+                    .shadow(color: Color.black.opacity(0.3), radius: 2, x: 0, y: 2)
             }
-            .padding(.vertical, 16)
-            .padding(.horizontal, 24)
-            .background(
-                Color.white.opacity(0.9)
-                    .cornerRadius(16)
-            )
             .padding(.top, 60)
 
             Spacer()
