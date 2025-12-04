@@ -78,6 +78,18 @@ struct DailyActivityCard: View {
                         lineWidth: 2
                     )
             )
+            .overlay(
+                // Accent bar on left
+                Rectangle()
+                    .fill(
+                        activity.isCompleted
+                        ? Color.gray.opacity(0.3)
+                        : Constants.Colors.primaryBlue
+                    )
+                    .frame(width: 4)
+                    .cornerRadius(2),
+                alignment: .leading
+            )
             .cornerRadius(Constants.CornerRadius.card)
             .opacity(activity.isCompleted ? 0.6 : 1.0)
         }
