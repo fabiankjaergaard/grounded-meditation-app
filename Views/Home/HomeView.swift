@@ -56,7 +56,7 @@ struct HomeView: View {
             Image("Blue-background")
                 .resizable()
                 .scaledToFill()
-                .frame(height: 340)
+                .frame(height: 320)
                 .clipped()
 
             VStack(spacing: Constants.Spacing.md) {
@@ -65,7 +65,7 @@ struct HomeView: View {
 
                 // Greeting
                 Text(viewModel.greeting)
-                    .font(Constants.Typography.title)
+                    .font(.system(size: 36, weight: .bold))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, Constants.Spacing.standard)
@@ -79,7 +79,7 @@ struct HomeView: View {
                 .padding(.bottom, Constants.Spacing.lg)
             }
         }
-        .frame(height: 340)
+        .frame(height: 320)
     }
 
     // MARK: - Daily Journey Section

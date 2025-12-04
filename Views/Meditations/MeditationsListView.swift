@@ -21,31 +21,35 @@ struct MeditationsListView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: Constants.Spacing.standard) {
+                VStack(spacing: 0) {
                     // Header
                     headerSection
 
                     // Category filter
                     categoryFilter
+                        .padding(.top, Constants.Spacing.standard)
 
                     // Meditation cards
-                    ForEach(filteredMeditations) { meditation in
-                        if meditation.isAvailable {
-                            NavigationLink(destination: MeditationDetailView(meditation: meditation)) {
-                                MeditationCard(meditation: meditation) {
-                                    // Navigation handled by NavigationLink
+                    VStack(spacing: Constants.Spacing.standard) {
+                        ForEach(filteredMeditations) { meditation in
+                            if meditation.isAvailable {
+                                NavigationLink(destination: MeditationDetailView(meditation: meditation)) {
+                                    MeditationCard(meditation: meditation) {
+                                        // Navigation handled by NavigationLink
+                                    }
                                 }
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        } else {
-                            MeditationCard(meditation: meditation) {
-                                // Disabled, do nothing
+                                .buttonStyle(PlainButtonStyle())
+                            } else {
+                                MeditationCard(meditation: meditation) {
+                                    // Disabled, do nothing
+                                }
                             }
                         }
                     }
+                    .padding(Constants.Spacing.standard)
                 }
-                .padding(Constants.Spacing.standard)
             }
+            .ignoresSafeArea(edges: .top)
             .background(Constants.Colors.backgroundBeige)
             .navigationBarHidden(true)
         }
@@ -53,25 +57,35 @@ struct MeditationsListView: View {
 
     // MARK: - Header
     private var headerSection: some View {
-        VStack(spacing: 8) {
-            Text("Meditationer")
-                .font(Constants.Typography.largeTitle)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-            Text("Välj din meditation för dagen")
-                .font(Constants.Typography.body)
-                .foregroundColor(.white.opacity(0.9))
-                .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        .padding(Constants.Spacing.standard)
-        .background(
+        ZStack {
+            // Background image
             Image("Blue-background")
                 .resizable()
                 .scaledToFill()
-        )
-        .cornerRadius(Constants.CornerRadius.card)
-        .clipped()
+                .frame(height: 180)
+                .clipped()
+
+            VStack(spacing: 8) {
+                Spacer()
+                    .frame(height: 60)
+
+                Text("Meditationer")
+                    .font(.system(size: 36, weight: .bold))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, Constants.Spacing.standard)
+
+                Text("Välj din meditation för dagen")
+                    .font(Constants.Typography.body)
+                    .foregroundColor(.white.opacity(0.9))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, Constants.Spacing.standard)
+
+                Spacer()
+                    .frame(height: 20)
+            }
+        }
+        .frame(height: 180)
     }
 
     // MARK: - Category Filter
@@ -87,6 +101,7 @@ struct MeditationsListView: View {
                     }
                 }
             }
+            .padding(.horizontal, Constants.Spacing.standard)
         }
     }
 

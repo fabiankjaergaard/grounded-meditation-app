@@ -53,7 +53,12 @@ struct ModeSelectionView: View {
                 Spacer()
             }
             .padding(Constants.Spacing.standard)
-            .background(Constants.Colors.backgroundBeige)
+            .background(
+                Image("Card-background-meditation")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+            )
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

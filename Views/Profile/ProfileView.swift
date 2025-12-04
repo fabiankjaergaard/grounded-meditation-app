@@ -15,18 +15,21 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: Constants.Spacing.standard) {
+                VStack(spacing: 0) {
                     // Profile header
                     profileHeader
 
                     // Stats
                     statsSection
+                        .padding(.horizontal, Constants.Spacing.standard)
+                        .padding(.top, Constants.Spacing.standard)
 
                     // Options
                     optionsSection
+                        .padding(Constants.Spacing.standard)
                 }
-                .padding(Constants.Spacing.standard)
             }
+            .ignoresSafeArea(edges: .top)
             .background(Constants.Colors.backgroundBeige)
             .navigationBarHidden(true)
             .sheet(isPresented: $showSettings) {
@@ -37,41 +40,53 @@ struct ProfileView: View {
 
     // MARK: - Profile Header
     private var profileHeader: some View {
-        VStack(spacing: 16) {
-            // Profile image
-            ZStack {
-                Circle()
-                    .fill(Constants.Colors.primaryBlue.opacity(0.1))
-                    .frame(width: 100, height: 100)
+        ZStack {
+            // Background image
+            Image("Blue-background")
+                .resizable()
+                .scaledToFill()
+                .frame(height: 280)
+                .clipped()
 
-                if let imageData = viewModel.userData.profileImage,
-                   let uiImage = UIImage(data: imageData) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
+            VStack(spacing: Constants.Spacing.md) {
+                Spacer()
+                    .frame(height: 60)
+
+                // Profile image
+                ZStack {
+                    Circle()
+                        .fill(Color.white.opacity(0.2))
                         .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                } else {
-                    Image(systemName: "person.fill")
-                        .font(.system(size: 48))
-                        .foregroundColor(Constants.Colors.primaryBlue)
+
+                    if let imageData = viewModel.userData.profileImage,
+                       let uiImage = UIImage(data: imageData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 100)
+                            .clipShape(Circle())
+                    } else {
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 48))
+                            .foregroundColor(.white)
+                    }
                 }
+
+                // Name
+                Text(viewModel.userData.name.isEmpty ? "Gäst" : viewModel.userData.name)
+                    .font(.system(size: 36, weight: .bold))
+                    .foregroundColor(.white)
+
+                // Join date
+                Text("Medlem sedan \(viewModel.userData.joinDate.shortDateString)")
+                    .font(Constants.Typography.body)
+                    .foregroundColor(.white.opacity(0.9))
+
+                Spacer()
+                    .frame(height: Constants.Spacing.standard)
             }
-
-            // Name
-            Text(viewModel.userData.name.isEmpty ? "Gäst" : viewModel.userData.name)
-                .font(Constants.Typography.headline)
-                .foregroundColor(Constants.Colors.textPrimary)
-
-            // Join date
-            Text("Medlem sedan \(viewModel.userData.joinDate.shortDateString)")
-                .font(Constants.Typography.caption)
-                .foregroundColor(Constants.Colors.textSecondary)
         }
-        .frame(maxWidth: .infinity)
-        .padding(Constants.Spacing.standard)
-        .background(Color.white)
-        .cornerRadius(Constants.CornerRadius.card)
+        .frame(height: 280)
     }
 
     // MARK: - Stats Section
