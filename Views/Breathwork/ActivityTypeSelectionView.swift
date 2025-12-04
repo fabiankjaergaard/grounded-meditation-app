@@ -15,6 +15,7 @@ struct ActivityTypeSelectionView: View {
         NavigationStack {
             VStack(spacing: Constants.Spacing.standard) {
                 Spacer()
+                    .frame(height: 40)
 
                 // Title
                 VStack(spacing: 8) {
@@ -28,7 +29,7 @@ struct ActivityTypeSelectionView: View {
                 }
 
                 Spacer()
-                    .frame(height: 40)
+                    .frame(height: 30)
 
                 // Activity type options
                 VStack(spacing: 16) {
@@ -50,6 +51,7 @@ struct ActivityTypeSelectionView: View {
                 }
 
                 Spacer()
+                    .frame(minHeight: 20)
             }
             .padding(Constants.Spacing.standard)
             .background(Constants.Colors.backgroundBeige)
