@@ -46,22 +46,30 @@ struct DailyActivityCard: View {
 
                 // Icon
                 ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(
-                            activity.isCompleted
-                            ? Color.gray.opacity(0.1)
-                            : Constants.Colors.accentOrange.opacity(0.1)
-                        )
-                        .frame(width: 48, height: 48)
-
                     if activity.id == "morning_breath" {
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(
+                                activity.isCompleted
+                                ? Color.gray.opacity(0.1)
+                                : Constants.Colors.accentOrange.opacity(0.1)
+                            )
+                            .frame(width: 80, height: 80)
+
                         Image("Morningcard")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 48, height: 48)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .frame(width: 80, height: 80)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
                             .opacity(activity.isCompleted ? 0.5 : 1.0)
                     } else {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(
+                                activity.isCompleted
+                                ? Color.gray.opacity(0.1)
+                                : Constants.Colors.accentOrange.opacity(0.1)
+                            )
+                            .frame(width: 48, height: 48)
+
                         Image(systemName: activity.icon)
                             .font(.system(size: 22))
                             .foregroundColor(
