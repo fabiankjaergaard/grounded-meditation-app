@@ -42,13 +42,13 @@ struct BreathworkView: View {
                 }
             }
             .sheet(isPresented: $showDurationSelection) {
-                DurationSelectionView(activityType: .breathwork) { duration in
+                DurationSelectionView(activityType: .breathwork, onSelectDuration: { duration in
                     selectedDuration = duration
                     showDurationSelection = false
                     // TODO: Show video player with selected duration
                     print("Show video for \(duration) minutes")
                     dismiss()
-                }
+                }, backgroundImage: "Breathworkbird")
             }
             .fullScreenCover(isPresented: $showInteractive) {
                 InteractiveBreathworkView(patternKey: patternKey) {
