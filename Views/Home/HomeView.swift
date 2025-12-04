@@ -14,6 +14,8 @@ struct HomeView: View {
     @State private var showBreathwork = false
     @State private var showDailyQuote = false
     @State private var showDailyVideo = false
+    @State private var showMeditationDetail = false
+    @State private var selectedMeditation: MeditationType?
     @State private var breathworkPatternKey = "morning"
 
     // MARK: - Body
@@ -57,6 +59,13 @@ struct HomeView: View {
             .sheet(isPresented: $showDailyVideo) {
                 DailyVideoView {
                     viewModel.completeActivity("evening_reflection")
+                }
+            }
+            .sheet(isPresented: $showMeditationDetail) {
+                if let meditation = selectedMeditation {
+                    NavigationStack {
+                        MeditationDetailView(meditation: meditation)
+                    }
                 }
             }
         }
@@ -183,8 +192,13 @@ struct HomeView: View {
     }
 
     private func handleBonusActivityTap(_ activity: Activity) {
-        print("Navigate to Meditation: \(activity.id)")
-        // TODO: Navigate to meditation detail screen
+        // Determine which meditation to show based on activity ID
+        if activity.id == "dynamic_meditation" {
+            selectedMeditation = .dynamic
+        } else if activity.id == "kundalini_meditation" {
+            selectedMeditation = .kundalini
+        }
+        showMeditationDetail = true
     }
 }
 
