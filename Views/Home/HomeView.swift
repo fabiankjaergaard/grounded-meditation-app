@@ -120,8 +120,8 @@ struct HomeView: View {
                             if index < viewModel.dailyActivities.count - 1 {
                                 Rectangle()
                                     .fill(activity.isCompleted ? Constants.Colors.primaryBlue : Color.gray.opacity(0.2))
-                                    .frame(width: 2, height: 90)
-                                    .offset(y: 57) // Börjar vid botten av cirkel och går hela vägen till toppen av nästa
+                                    .frame(width: 2, height: 78)
+                                    .offset(y: 51) // Börjar vid botten av cirkel (y:12) och slutar vid toppen av nästa (y:-12)
                             }
 
                             // Prick
