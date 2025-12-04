@@ -78,54 +78,99 @@ struct ActivityTypeCard: View {
 
     var body: some View {
         Button(action: onTap) {
-            HStack(spacing: 20) {
-                // Icon
-                ZStack {
-                    Circle()
-                        .fill(Constants.Colors.primaryBlue.opacity(0.1))
-                        .frame(width: 64, height: 64)
-
-                    Image(systemName: icon)
-                        .font(.system(size: 28))
-                        .foregroundColor(Constants.Colors.primaryBlue)
-                }
-
-                // Content
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
-                        .font(Constants.Typography.bodyBold)
-                        .foregroundColor(backgroundImage != nil ? .white : Constants.Colors.textPrimary)
-
-                    Text(description)
-                        .font(Constants.Typography.subheadline)
-                        .foregroundColor(backgroundImage != nil ? .white.opacity(0.9) : Constants.Colors.textSecondary)
-                }
-
-                Spacer()
-
-                Image(systemName: Constants.Icons.chevronRight)
-                    .foregroundColor(backgroundImage != nil ? .white.opacity(0.7) : Constants.Colors.textTertiary)
-            }
-            .padding(Constants.Spacing.standard)
-            .background(
-                Group {
-                    if let backgroundImage = backgroundImage {
+            if let backgroundImage = backgroundImage {
+                // Card with background image (meditation)
+                VStack(spacing: 0) {
+                    // Background image section
+                    ZStack {
                         Image(backgroundImage)
                             .resizable()
                             .scaledToFill()
-                    } else {
-                        Color.white
+                            .frame(height: 180)
+                            .clipped()
                     }
+
+                    // White content section at bottom
+                    HStack(spacing: 16) {
+                        // Icon
+                        ZStack {
+                            Circle()
+                                .fill(Constants.Colors.primaryBlue.opacity(0.1))
+                                .frame(width: 56, height: 56)
+
+                            Image(systemName: icon)
+                                .font(.system(size: 24))
+                                .foregroundColor(Constants.Colors.primaryBlue)
+                        }
+
+                        // Content
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(title)
+                                .font(Constants.Typography.bodyBold)
+                                .foregroundColor(Constants.Colors.textPrimary)
+
+                            Text(description)
+                                .font(Constants.Typography.subheadline)
+                                .foregroundColor(Constants.Colors.textSecondary)
+                        }
+
+                        Spacer()
+
+                        Image(systemName: Constants.Icons.chevronRight)
+                            .foregroundColor(Constants.Colors.textTertiary)
+                    }
+                    .padding(Constants.Spacing.standard)
+                    .background(Color.white)
                 }
-            )
-            .cornerRadius(Constants.CornerRadius.card)
-            .clipped()
-            .shadow(
-                color: Constants.Shadow.color,
-                radius: Constants.Shadow.radius,
-                x: Constants.Shadow.x,
-                y: Constants.Shadow.y
-            )
+                .cornerRadius(Constants.CornerRadius.card)
+                .clipped()
+                .shadow(
+                    color: Constants.Shadow.color,
+                    radius: Constants.Shadow.radius,
+                    x: Constants.Shadow.x,
+                    y: Constants.Shadow.y
+                )
+            } else {
+                // Simple white card (breathwork)
+                HStack(spacing: 16) {
+                    // Icon
+                    ZStack {
+                        Circle()
+                            .fill(Constants.Colors.primaryBlue.opacity(0.1))
+                            .frame(width: 56, height: 56)
+
+                        Image(systemName: icon)
+                            .font(.system(size: 24))
+                            .foregroundColor(Constants.Colors.primaryBlue)
+                    }
+
+                    // Content
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(title)
+                            .font(Constants.Typography.bodyBold)
+                            .foregroundColor(Constants.Colors.textPrimary)
+
+                        Text(description)
+                            .font(Constants.Typography.subheadline)
+                            .foregroundColor(Constants.Colors.textSecondary)
+                    }
+
+                    Spacer()
+
+                    Image(systemName: Constants.Icons.chevronRight)
+                        .foregroundColor(Constants.Colors.textTertiary)
+                }
+                .padding(Constants.Spacing.standard)
+                .frame(height: 100)
+                .background(Color.white)
+                .cornerRadius(Constants.CornerRadius.card)
+                .shadow(
+                    color: Constants.Shadow.color,
+                    radius: Constants.Shadow.radius,
+                    x: Constants.Shadow.x,
+                    y: Constants.Shadow.y
+                )
+            }
         }
     }
 }
