@@ -78,60 +78,23 @@ struct ActivityTypeCard: View {
 
     var body: some View {
         Button(action: onTap) {
-            if let backgroundImage = backgroundImage {
-                // Card with background image (meditation)
-                VStack(spacing: 0) {
-                    // Background image section
-                    ZStack {
+            VStack(spacing: 0) {
+                // Background image or empty section
+                ZStack {
+                    if let backgroundImage = backgroundImage {
                         Image(backgroundImage)
                             .resizable()
                             .scaledToFill()
                             .frame(height: 180)
                             .clipped()
+                    } else {
+                        // Empty colored space for breathwork
+                        Constants.Colors.primaryBlue.opacity(0.05)
+                            .frame(height: 180)
                     }
-
-                    // White content section at bottom
-                    HStack(spacing: 16) {
-                        // Icon
-                        ZStack {
-                            Circle()
-                                .fill(Constants.Colors.primaryBlue.opacity(0.1))
-                                .frame(width: 56, height: 56)
-
-                            Image(systemName: icon)
-                                .font(.system(size: 24))
-                                .foregroundColor(Constants.Colors.primaryBlue)
-                        }
-
-                        // Content
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(title)
-                                .font(Constants.Typography.bodyBold)
-                                .foregroundColor(Constants.Colors.textPrimary)
-
-                            Text(description)
-                                .font(Constants.Typography.subheadline)
-                                .foregroundColor(Constants.Colors.textSecondary)
-                        }
-
-                        Spacer()
-
-                        Image(systemName: Constants.Icons.chevronRight)
-                            .foregroundColor(Constants.Colors.textTertiary)
-                    }
-                    .padding(Constants.Spacing.standard)
-                    .background(Color.white)
                 }
-                .cornerRadius(Constants.CornerRadius.card)
-                .clipped()
-                .shadow(
-                    color: Constants.Shadow.color,
-                    radius: Constants.Shadow.radius,
-                    x: Constants.Shadow.x,
-                    y: Constants.Shadow.y
-                )
-            } else {
-                // Simple white card (breathwork)
+
+                // White content section at bottom
                 HStack(spacing: 16) {
                     // Icon
                     ZStack {
@@ -161,16 +124,16 @@ struct ActivityTypeCard: View {
                         .foregroundColor(Constants.Colors.textTertiary)
                 }
                 .padding(Constants.Spacing.standard)
-                .frame(height: 100)
                 .background(Color.white)
-                .cornerRadius(Constants.CornerRadius.card)
-                .shadow(
-                    color: Constants.Shadow.color,
-                    radius: Constants.Shadow.radius,
-                    x: Constants.Shadow.x,
-                    y: Constants.Shadow.y
-                )
             }
+            .cornerRadius(Constants.CornerRadius.card)
+            .clipped()
+            .shadow(
+                color: Constants.Shadow.color,
+                radius: Constants.Shadow.radius,
+                x: Constants.Shadow.x,
+                y: Constants.Shadow.y
+            )
         }
     }
 }
