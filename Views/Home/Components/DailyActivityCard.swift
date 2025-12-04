@@ -61,6 +61,21 @@ struct DailyActivityCard: View {
                             .frame(width: 80, height: 80)
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                             .opacity(activity.isCompleted ? 0.5 : 1.0)
+                    } else if activity.id == "midday_reset" {
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(
+                                activity.isCompleted
+                                ? Color.gray.opacity(0.1)
+                                : Constants.Colors.accentOrange.opacity(0.1)
+                            )
+                            .frame(width: 80, height: 80)
+
+                        Image("Sun")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 80, height: 80)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                            .opacity(activity.isCompleted ? 0.5 : 1.0)
                     } else {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(
