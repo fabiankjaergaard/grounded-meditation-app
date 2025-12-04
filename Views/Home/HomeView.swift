@@ -145,10 +145,26 @@ struct HomeView: View {
     @ViewBuilder
     private var bonusSection: some View {
         if let bonusActivity = viewModel.bonusActivity {
-            BonusActivityCard(activity: bonusActivity) {
-                handleBonusActivityTap(bonusActivity)
+            VStack(spacing: Constants.Spacing.md) {
+                // Separator line
+                Rectangle()
+                    .fill(Color.gray.opacity(0.2))
+                    .frame(height: 1)
+                    .padding(.horizontal, Constants.Spacing.standard)
+
+                // Section header
+                Text("Har du mer tid?")
+                    .font(Constants.Typography.headline)
+                    .foregroundColor(Constants.Colors.textPrimary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, Constants.Spacing.standard)
+
+                // Bonus activity card
+                BonusActivityCard(activity: bonusActivity) {
+                    handleBonusActivityTap(bonusActivity)
+                }
+                .padding(.horizontal, Constants.Spacing.standard)
             }
-            .padding(.horizontal, Constants.Spacing.standard)
             .padding(.bottom, Constants.Spacing.xl)
         }
     }
