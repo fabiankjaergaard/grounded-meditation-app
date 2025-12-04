@@ -92,5 +92,5 @@ struct DurationCard: View {
 #Preview {
     DurationSelectionView(activityType: .meditation, onSelectDuration: { duration in
         print("Selected: \(duration) minutes")
-    }, backgroundImage: "Meditatingbear")
+    }, backgroundImage: "meditationcard")
 }
