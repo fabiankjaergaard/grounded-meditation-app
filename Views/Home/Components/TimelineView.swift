@@ -18,7 +18,7 @@ struct TimelineView: View {
                 Circle()
                     .stroke(
                         isCompleted ? Constants.Colors.primaryBlue : Color.gray.opacity(0.3),
-                        lineWidth: 2
+                        lineWidth: 4
                     )
             )
             .overlay(
