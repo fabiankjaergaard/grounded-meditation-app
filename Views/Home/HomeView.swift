@@ -14,7 +14,6 @@ struct HomeView: View {
     @State private var showBreathwork = false
     @State private var showDailyQuote = false
     @State private var showDailyVideo = false
-    @State private var showMeditationDetail = false
     @State private var selectedMeditation: Meditation?
     @State private var breathworkPatternKey = "morning"
 
@@ -61,11 +60,9 @@ struct HomeView: View {
                     viewModel.completeActivity("evening_reflection")
                 }
             }
-            .sheet(isPresented: $showMeditationDetail) {
-                if let meditation = selectedMeditation {
-                    NavigationStack {
-                        MeditationDetailView(meditation: meditation)
-                    }
+            .sheet(item: $selectedMeditation) { meditation in
+                NavigationStack {
+                    MeditationDetailView(meditation: meditation)
                 }
             }
         }
@@ -202,9 +199,6 @@ struct HomeView: View {
             selectedMeditation = .kundaliniMeditation
         }
         print("🎯 Selected meditation: \(String(describing: selectedMeditation))")
-        print("📱 Showing detail: \(showMeditationDetail)")
-        showMeditationDetail = true
-        print("📱 After setting - Showing detail: \(showMeditationDetail)")
     }
 }
 
