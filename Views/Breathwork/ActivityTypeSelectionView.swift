@@ -34,7 +34,7 @@ struct ActivityTypeSelectionView: View {
                     NavigationLink(destination: DurationSelectionView(activityType: .meditation, onSelectDuration: { duration in
                         onComplete(.meditation, duration)
                         dismiss()
-                    })) {
+                    }, backgroundImage: "Meditatingbear")) {
                         ActivityTypeCard(
                             title: Strings.ActivitySelection.meditationTitle,
                             description: Strings.ActivitySelection.meditationDescription,
@@ -46,7 +46,7 @@ struct ActivityTypeSelectionView: View {
                     NavigationLink(destination: DurationSelectionView(activityType: .breathwork, onSelectDuration: { duration in
                         onComplete(.breathwork, duration)
                         dismiss()
-                    })) {
+                    }, backgroundImage: "Breathworkbird")) {
                         ActivityTypeCard(
                             title: Strings.ActivitySelection.breathworkTitle,
                             description: Strings.ActivitySelection.breathworkDescription,

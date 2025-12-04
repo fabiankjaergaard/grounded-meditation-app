@@ -11,6 +11,7 @@ struct DurationSelectionView: View {
     @Environment(\.dismiss) var dismiss
     let activityType: ActivityType
     let onSelectDuration: (Int) -> Void
+    let backgroundImage: String
 
     let durations = [5, 10, 15, 20]
 
@@ -45,7 +46,7 @@ struct DurationSelectionView: View {
         }
         .padding(Constants.Spacing.standard)
         .background(
-            Image("Card-background-meditation")
+            Image(backgroundImage)
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
@@ -89,7 +90,7 @@ struct DurationCard: View {
 }
 
 #Preview {
-    DurationSelectionView(activityType: .meditation) { duration in
+    DurationSelectionView(activityType: .meditation, onSelectDuration: { duration in
         print("Selected: \(duration) minutes")
-    }
+    }, backgroundImage: "Meditatingbear")
 }
