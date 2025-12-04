@@ -86,8 +86,8 @@ struct DailyActivityCard: View {
                         ? Color.gray.opacity(0.3)
                         : Constants.Colors.accentOrange
                     )
-                    .frame(width: 4)
-                    .cornerRadius(2),
+                    .frame(width: 6)
+                    .cornerRadius(3),
                 alignment: .leading
             )
             .cornerRadius(Constants.CornerRadius.card)
