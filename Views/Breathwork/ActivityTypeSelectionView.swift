@@ -85,14 +85,12 @@ struct ActivityTypeCard: View {
             // Background image or empty section
             ZStack {
                 if let backgroundImage = backgroundImage {
-                    GeometryReader { geometry in
-                        Image(backgroundImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(height: 160)
-                            .offset(y: backgroundImage == "Meditatingbear" ? 30 : -20)
-                            .clipped()
-                    }
+                    Image(backgroundImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 160)
+                        .offset(y: backgroundImage == "Meditatingbear" ? 30 : -20)
+                        .clipped()
                 } else {
                     // Empty colored space for breathwork
                     Constants.Colors.primaryBlue.opacity(0.05)
