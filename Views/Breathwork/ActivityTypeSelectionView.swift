@@ -38,7 +38,7 @@ struct ActivityTypeSelectionView: View {
                         ActivityTypeCard(
                             title: Strings.ActivitySelection.meditationTitle,
                             description: Strings.ActivitySelection.meditationDescription,
-                            backgroundImage: "Card-background-meditation"
+                            backgroundImage: "Meditatingbear"
                         )
                     }
                     .buttonStyle(PlainButtonStyle())
