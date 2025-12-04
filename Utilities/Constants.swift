@@ -13,7 +13,7 @@ enum Constants {
     // MARK: - Colors
     enum Colors {
         static let primaryBlue = Color(hex: "#2B4C7E")
-        static let accentOrange = Color(hex: "#FF8C42")
+        static let accentOrange = Color(hex: "#2B4C7E") // Changed to dark blue
         static let backgroundBeige = Color(hex: "#F5F5F0")
         static let textPrimary = Color(hex: "#2C3E50")
         static let textSecondary = Color(hex: "#7F8C8D")
