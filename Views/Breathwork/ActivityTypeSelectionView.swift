@@ -16,11 +16,11 @@ struct ActivityTypeSelectionView: View {
             VStack(spacing: Constants.Spacing.standard) {
                 // Title
                 VStack(spacing: 8) {
-                    Text("Välj aktivitet")
+                    Text("Choose your practice")
                         .font(Constants.Typography.title)
                         .foregroundColor(Constants.Colors.textPrimary)
 
-                    Text("Hur vill du börja din dag?")
+                    Text("How do you want to start your day?")
                         .font(Constants.Typography.body)
                         .foregroundColor(Constants.Colors.textSecondary)
                 }
@@ -36,8 +36,8 @@ struct ActivityTypeSelectionView: View {
                         dismiss()
                     })) {
                         ActivityTypeCard(
-                            title: "Meditation",
-                            description: "Lugn och närvaro",
+                            title: "Start your day grounded",
+                            description: "Meditation for inner peace",
                             backgroundImage: "Card-background-meditation"
                         )
                     }
@@ -48,8 +48,8 @@ struct ActivityTypeSelectionView: View {
                         dismiss()
                     })) {
                         ActivityTypeCard(
-                            title: "Breathwork",
-                            description: "Andningsövningar",
+                            title: "Wake up with energy",
+                            description: "Breathwork for focus",
                             backgroundImage: nil
                         )
                     }
