@@ -62,33 +62,14 @@ struct DurationCard: View {
 
     var body: some View {
         Button(action: onTap) {
-            HStack(spacing: 16) {
-                // Clock icon
-                ZStack {
-                    Circle()
-                        .fill(Constants.Colors.primaryBlue.opacity(0.1))
-                        .frame(width: 48, height: 48)
-
-                    Image(systemName: Constants.Icons.clock)
-                        .font(.system(size: 20))
-                        .foregroundColor(Constants.Colors.primaryBlue)
-                }
-
-                // Duration text
-                HStack(spacing: 6) {
-                    Text("\(duration)")
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(Constants.Colors.textPrimary)
-
-                    Text(Strings.DurationSelection.minutes)
-                        .font(Constants.Typography.body)
-                        .foregroundColor(Constants.Colors.textSecondary)
-                }
-
+            HStack {
                 Spacer()
 
-                Image(systemName: Constants.Icons.chevronRight)
-                    .foregroundColor(Constants.Colors.textTertiary)
+                Text("\(duration) min")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(Constants.Colors.textPrimary)
+
+                Spacer()
             }
             .padding(16)
             .background(Color.white)
