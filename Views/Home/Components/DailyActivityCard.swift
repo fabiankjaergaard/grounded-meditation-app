@@ -85,7 +85,7 @@ struct DailyActivityCard: View {
                             )
                             .frame(width: 80, height: 80)
 
-                        Image("Camera")
+                        Image("Moon")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 80, height: 80)
