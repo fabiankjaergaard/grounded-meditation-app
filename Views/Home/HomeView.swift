@@ -192,13 +192,19 @@ struct HomeView: View {
     }
 
     private func handleBonusActivityTap(_ activity: Activity) {
+        print("🔍 Bonus activity tapped: \(activity.id)")
         // Determine which meditation to show based on activity ID
         if activity.id == "dynamic_meditation" {
+            print("✅ Setting Dynamic Meditation")
             selectedMeditation = .dynamicMeditation
         } else if activity.id == "kundalini_meditation" {
+            print("✅ Setting Kundalini Meditation")
             selectedMeditation = .kundaliniMeditation
         }
+        print("🎯 Selected meditation: \(String(describing: selectedMeditation))")
+        print("📱 Showing detail: \(showMeditationDetail)")
         showMeditationDetail = true
+        print("📱 After setting - Showing detail: \(showMeditationDetail)")
     }
 }
 
