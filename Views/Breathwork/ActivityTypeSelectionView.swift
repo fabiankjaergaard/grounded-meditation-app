@@ -54,12 +54,7 @@ struct ActivityTypeSelectionView: View {
                 Spacer()
             }
             .padding(Constants.Spacing.standard)
-            .background(
-                Image("Card-background-meditation")
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
-            )
+            .background(Constants.Colors.backgroundBeige)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
