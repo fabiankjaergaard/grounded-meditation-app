@@ -13,30 +13,34 @@ struct MeditationDetailView: View {
     @State private var showTimer = false
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: Constants.Spacing.standard) {
-                // Header image/icon
-                headerSection
+        ZStack {
+            Constants.Colors.backgroundBeige
+                .ignoresSafeArea()
 
-                // Title and duration
-                titleSection
+            ScrollView {
+                VStack(spacing: Constants.Spacing.standard) {
+                    // Header image/icon
+                    headerSection
 
-                // Description
-                descriptionSection
+                    // Title and duration
+                    titleSection
 
-                // Instructions
-                if meditation.id == "dynamic" {
-                    dynamicInstructionsSection
-                } else if meditation.id == "kundalini" {
-                    kundaliniInstructionsSection
+                    // Description
+                    descriptionSection
+
+                    // Instructions
+                    if meditation.id == "dynamic" {
+                        dynamicInstructionsSection
+                    } else if meditation.id == "kundalini" {
+                        kundaliniInstructionsSection
+                    }
+
+                    // Start button
+                    startButton
                 }
-
-                // Start button
-                startButton
+                .padding(Constants.Spacing.standard)
             }
-            .padding(Constants.Spacing.standard)
         }
-        .background(Constants.Colors.backgroundBeige)
         .navigationTitle(meditation.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
