@@ -54,13 +54,22 @@ struct DailyActivityCard: View {
                         )
                         .frame(width: 48, height: 48)
 
-                    Image(systemName: activity.icon)
-                        .font(.system(size: 22))
-                        .foregroundColor(
-                            activity.isCompleted
-                            ? .gray
-                            : Constants.Colors.accentOrange
-                        )
+                    if activity.id == "morning_breath" {
+                        Image("Morningcard")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 48, height: 48)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .opacity(activity.isCompleted ? 0.5 : 1.0)
+                    } else {
+                        Image(systemName: activity.icon)
+                            .font(.system(size: 22))
+                            .foregroundColor(
+                                activity.isCompleted
+                                ? .gray
+                                : Constants.Colors.accentOrange
+                            )
+                    }
                 }
             }
             .padding(16)
