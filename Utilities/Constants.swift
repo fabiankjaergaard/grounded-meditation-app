@@ -132,31 +132,31 @@ enum Constants {
 
     static let breathPatterns: [String: BreathPattern] = [
         "morning": BreathPattern(
-            name: "Morgonandning",
-            description: "Energiserande andning för att väcka kroppen",
+            name: "Morning Breath",
+            description: "Energizing breathing to wake the body",
             phases: [
-                .init(type: .inhale, duration: 4, text: "Andas in djupt"),
-                .init(type: .hold, duration: 2, text: "Håll andan"),
-                .init(type: .exhale, duration: 6, text: "Andas ut långsamt")
+                .init(type: .inhale, duration: 4, text: "Breathe in deeply"),
+                .init(type: .hold, duration: 2, text: "Hold your breath"),
+                .init(type: .exhale, duration: 6, text: "Breathe out slowly")
             ]
         ),
         "box": BreathPattern(
             name: "Box Breathing",
-            description: "4-4-4-4 andning för lugn och fokus",
+            description: "4-4-4-4 breathing for calm and focus",
             phases: [
-                .init(type: .inhale, duration: 4, text: "Andas in"),
-                .init(type: .hold, duration: 4, text: "Håll andan"),
-                .init(type: .exhale, duration: 4, text: "Andas ut"),
-                .init(type: .hold, duration: 4, text: "Håll andan")
+                .init(type: .inhale, duration: 4, text: "Breathe in"),
+                .init(type: .hold, duration: 4, text: "Hold"),
+                .init(type: .exhale, duration: 4, text: "Breathe out"),
+                .init(type: .hold, duration: 4, text: "Hold")
             ]
         ),
         "calm": BreathPattern(
             name: "4-7-8 Breathing",
-            description: "Dr. Weil's teknik för avslappning och sömn",
+            description: "Dr. Weil's technique for relaxation and sleep",
             phases: [
-                .init(type: .inhale, duration: 4, text: "Andas in"),
-                .init(type: .hold, duration: 7, text: "Håll andan"),
-                .init(type: .exhale, duration: 8, text: "Andas ut")
+                .init(type: .inhale, duration: 4, text: "Breathe in"),
+                .init(type: .hold, duration: 7, text: "Hold"),
+                .init(type: .exhale, duration: 8, text: "Breathe out")
             ]
         )
     ]
@@ -185,13 +185,13 @@ enum Constants {
         var greeting: String {
             switch self {
             case .morning:
-                return "God morgon"
+                return Strings.Home.morningGreeting
             case .afternoon:
-                return "God eftermiddag"
+                return Strings.Home.afternoonGreeting
             case .evening:
-                return "God kväll"
+                return Strings.Home.eveningGreeting
             case .night:
-                return "God natt"
+                return Strings.Home.eveningGreeting // Use evening for night too
             }
         }
     }

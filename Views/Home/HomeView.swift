@@ -100,11 +100,11 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: Constants.Spacing.md) {
             // Section title
             VStack(alignment: .leading, spacing: 4) {
-                Text("Dagens resa")
+                Text(Strings.Home.dailyJourneyTitle)
                     .font(Constants.Typography.headline)
                     .foregroundColor(Constants.Colors.textPrimary)
 
-                Text("Tre enkla praktiker för att behålla Baravara-känslan i vardagen")
+                Text(Strings.Home.dailyJourneySubtitle)
                     .font(Constants.Typography.subheadline)
                     .foregroundColor(Constants.Colors.textSecondary)
             }
@@ -153,7 +153,7 @@ struct HomeView: View {
                     .padding(.horizontal, Constants.Spacing.standard)
 
                 // Section header
-                Text("Har du mer tid?")
+                Text(Strings.Home.bonusTitle)
                     .font(Constants.Typography.headline)
                     .foregroundColor(Constants.Colors.textPrimary)
                     .frame(maxWidth: .infinity, alignment: .leading)

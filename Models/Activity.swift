@@ -30,9 +30,9 @@ struct Activity: Identifiable, Codable {
 extension Activity {
     static let morningBreath = Activity(
         id: "morning_breath",
-        label: "MORGON",
-        title: "Morgonandning",
-        subtitle: "Aktivera kropp & sinne",
+        label: Strings.Activities.morningLabel,
+        title: Strings.Activities.morningTitle,
+        subtitle: Strings.Activities.morningSubtitle,
         duration: "5 min",
         icon: "heart.fill",
         type: .breathwork
@@ -40,9 +40,9 @@ extension Activity {
 
     static let middayReset = Activity(
         id: "midday_reset",
-        label: "UNDER DAGEN",
-        title: "Middag Reset",
-        subtitle: "Meditation + dagens citat",
+        label: Strings.Activities.middayLabel,
+        title: Strings.Activities.middayTitle,
+        subtitle: Strings.Activities.middaySubtitle,
         duration: "5 min",
         icon: "play.circle.fill",
         type: .quote
@@ -50,9 +50,9 @@ extension Activity {
 
     static let eveningReflection = Activity(
         id: "evening_reflection",
-        label: "KVÄLL",
-        title: "Dagens Reflektion",
-        subtitle: "Reflections of Life",
+        label: Strings.Activities.eveningLabel,
+        title: Strings.Activities.eveningTitle,
+        subtitle: Strings.Activities.eveningSubtitle,
         duration: "10 min",
         icon: "video.fill",
         type: .video
@@ -61,8 +61,8 @@ extension Activity {
     static let dynamicMeditation = Activity(
         id: "dynamic_meditation",
         label: "BONUS",
-        title: "Dynamic Meditation",
-        subtitle: "Kraftfull morgonmeditation",
+        title: Strings.Activities.dynamicMeditationTitle,
+        subtitle: Strings.Activities.dynamicMeditationSubtitle,
         duration: "60 min",
         icon: "bolt.fill",
         type: .meditation
@@ -71,8 +71,8 @@ extension Activity {
     static let kundaliniMeditation = Activity(
         id: "kundalini_meditation",
         label: "BONUS",
-        title: "Kundalini Meditation",
-        subtitle: "Skakningar och dans",
+        title: Strings.Activities.kundaliniMeditationTitle,
+        subtitle: Strings.Activities.kundaliniMeditationSubtitle,
         duration: "60 min",
         icon: "sparkles",
         type: .meditation

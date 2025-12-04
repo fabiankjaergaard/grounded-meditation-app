@@ -20,11 +20,11 @@ struct DurationSelectionView: View {
 
             // Title
             VStack(spacing: 8) {
-                Text("Välj längd")
+                Text(Strings.DurationSelection.title)
                     .font(Constants.Typography.title)
                     .foregroundColor(Constants.Colors.textPrimary)
 
-                Text(activityType == .meditation ? "Hur länge vill du meditera?" : "Hur länge vill du andas?")
+                Text(Strings.DurationSelection.subtitle(activityType: activityType == .meditation ? "meditation" : "breathwork"))
                     .font(Constants.Typography.body)
                     .foregroundColor(Constants.Colors.textSecondary)
             }
@@ -80,7 +80,7 @@ struct DurationCard: View {
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(Constants.Colors.textPrimary)
 
-                    Text("minuter")
+                    Text(Strings.DurationSelection.minutes)
                         .font(Constants.Typography.body)
                         .foregroundColor(Constants.Colors.textSecondary)
                 }

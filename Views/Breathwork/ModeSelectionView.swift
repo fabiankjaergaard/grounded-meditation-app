@@ -19,11 +19,11 @@ struct ModeSelectionView: View {
 
                 // Title
                 VStack(spacing: 8) {
-                    Text("Välj typ")
+                    Text(Strings.ModeSelection.title)
                         .font(Constants.Typography.title)
                         .foregroundColor(Constants.Colors.textPrimary)
 
-                    Text("Hur vill du börja din dag?")
+                    Text(Strings.ModeSelection.subtitle)
                         .font(Constants.Typography.body)
                         .foregroundColor(Constants.Colors.textSecondary)
                 }
@@ -35,16 +35,16 @@ struct ModeSelectionView: View {
                 VStack(spacing: 16) {
                     ModeOptionCard(
                         icon: "video.fill",
-                        title: "Guidat Video",
-                        description: "Följ med i en videoguidad session"
+                        title: Strings.ModeSelection.videoTitle,
+                        description: Strings.ModeSelection.videoDescription
                     ) {
                         onSelectMode(.video)
                     }
 
                     ModeOptionCard(
                         icon: "hand.raised.fill",
-                        title: "Interaktiv",
-                        description: "Andas med animerad guide"
+                        title: Strings.ModeSelection.interactiveTitle,
+                        description: Strings.ModeSelection.interactiveDescription
                     ) {
                         onSelectMode(.interactive)
                     }
