@@ -77,17 +77,9 @@ struct DailyActivityCard: View {
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                             .opacity(activity.isCompleted ? 0.5 : 1.0)
                     } else if activity.id == "evening_reflection" {
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(
-                                activity.isCompleted
-                                ? Color.gray.opacity(0.1)
-                                : Constants.Colors.accentOrange.opacity(0.1)
-                            )
-                            .frame(width: 80, height: 80)
-
                         Image("Star")
                             .resizable()
-                            .scaledToFit()
+                            .scaledToFill()
                             .frame(width: 80, height: 80)
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                             .opacity(activity.isCompleted ? 0.5 : 1.0)
