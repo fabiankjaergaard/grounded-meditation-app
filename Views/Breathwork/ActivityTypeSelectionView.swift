@@ -111,14 +111,6 @@ struct ActivityTypeCard: View {
                 RoundedRectangle(cornerRadius: Constants.CornerRadius.card)
                     .stroke(Constants.Colors.primaryBlue, lineWidth: 2)
             )
-            .overlay(
-                // Accent bar on left
-                Rectangle()
-                    .fill(Constants.Colors.primaryBlue)
-                    .frame(width: 4)
-                    .cornerRadius(2),
-                alignment: .leading
-            )
             .shadow(
                 color: Constants.Shadow.color,
                 radius: Constants.Shadow.radius,
