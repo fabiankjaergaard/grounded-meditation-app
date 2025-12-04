@@ -50,7 +50,7 @@ struct ActivityTypeSelectionView: View {
                         ActivityTypeCard(
                             title: Strings.ActivitySelection.breathworkTitle,
                             description: Strings.ActivitySelection.breathworkDescription,
-                            backgroundImage: "breathworkbird"
+                            backgroundImage: "Breathworkbird"
                         )
                     }
                     .buttonStyle(PlainButtonStyle())
