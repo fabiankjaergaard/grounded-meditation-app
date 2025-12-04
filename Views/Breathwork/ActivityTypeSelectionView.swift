@@ -1,18 +1,15 @@
 //
-//  DurationSelectionView.swift
+//  ActivityTypeSelectionView.swift
 //  Grounded
 //
-//  Created by Fabian Kjaergaard on 2025-12-03.
+//  Created by Fabian Kjaergaard on 2025-12-04.
 //
 
 import SwiftUI
 
-struct DurationSelectionView: View {
+struct ActivityTypeSelectionView: View {
     @Environment(\.dismiss) var dismiss
-    let activityType: ActivityType
-    let onSelectDuration: (Int) -> Void
-
-    let durations = [5, 10, 15, 20]
+    let onSelectType: (ActivityType) -> Void
 
     var body: some View {
         NavigationStack {
@@ -21,11 +18,11 @@ struct DurationSelectionView: View {
 
                 // Title
                 VStack(spacing: 8) {
-                    Text("Välj längd")
+                    Text("Välj aktivitet")
                         .font(Constants.Typography.title)
                         .foregroundColor(Constants.Colors.textPrimary)
 
-                    Text(activityType == .meditation ? "Hur länge vill du meditera?" : "Hur länge vill du andas?")
+                    Text("Hur vill du börja din dag?")
                         .font(Constants.Typography.body)
                         .foregroundColor(Constants.Colors.textSecondary)
                 }
@@ -33,15 +30,22 @@ struct DurationSelectionView: View {
                 Spacer()
                     .frame(height: 40)
 
-                // Duration options
-                LazyVGrid(columns: [
-                    GridItem(.flexible()),
-                    GridItem(.flexible())
-                ], spacing: 16) {
-                    ForEach(durations, id: \.self) { duration in
-                        DurationCard(duration: duration) {
-                            onSelectDuration(duration)
-                        }
+                // Activity type options
+                VStack(spacing: 16) {
+                    ActivityTypeCard(
+                        icon: "sparkles",
+                        title: "Meditation",
+                        description: "Lugn och närvaro"
+                    ) {
+                        onSelectType(.meditation)
+                    }
+
+                    ActivityTypeCard(
+                        icon: "wind",
+                        title: "Breathwork",
+                        description: "Andningsövningar"
+                    ) {
+                        onSelectType(.breathwork)
                     }
                 }
 
@@ -58,7 +62,7 @@ struct DurationSelectionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {
-                        Image(systemName: "arrow.left")
+                        Image(systemName: "xmark")
                             .foregroundColor(Constants.Colors.textPrimary)
                     }
                 }
@@ -67,38 +71,44 @@ struct DurationSelectionView: View {
     }
 }
 
-// MARK: - Duration Card
-struct DurationCard: View {
-    let duration: Int
+// MARK: - Activity Type Card
+struct ActivityTypeCard: View {
+    let icon: String
+    let title: String
+    let description: String
     let onTap: () -> Void
 
     var body: some View {
         Button(action: onTap) {
-            VStack(spacing: 16) {
-                // Clock icon
+            HStack(spacing: 20) {
+                // Icon
                 ZStack {
                     Circle()
                         .fill(Constants.Colors.primaryBlue.opacity(0.1))
                         .frame(width: 64, height: 64)
 
-                    Image(systemName: Constants.Icons.clock)
+                    Image(systemName: icon)
                         .font(.system(size: 28))
                         .foregroundColor(Constants.Colors.primaryBlue)
                 }
 
-                // Duration text
-                VStack(spacing: 4) {
-                    Text("\(duration)")
-                        .font(.system(size: 32, weight: .bold))
+                // Content
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(Constants.Typography.bodyBold)
                         .foregroundColor(Constants.Colors.textPrimary)
 
-                    Text("minuter")
+                    Text(description)
                         .font(Constants.Typography.subheadline)
                         .foregroundColor(Constants.Colors.textSecondary)
                 }
+
+                Spacer()
+
+                Image(systemName: Constants.Icons.chevronRight)
+                    .foregroundColor(Constants.Colors.textTertiary)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, Constants.Spacing.standard)
+            .padding(Constants.Spacing.standard)
             .background(Color.white)
             .cornerRadius(Constants.CornerRadius.card)
             .shadow(
@@ -111,8 +121,13 @@ struct DurationCard: View {
     }
 }
 
+enum ActivityType {
+    case meditation
+    case breathwork
+}
+
 #Preview {
-    DurationSelectionView(activityType: .meditation) { duration in
-        print("Selected: \(duration) minutes")
+    ActivityTypeSelectionView { type in
+        print("Selected: \(type)")
     }
 }

@@ -42,7 +42,7 @@ struct BreathworkView: View {
                 }
             }
             .sheet(isPresented: $showDurationSelection) {
-                DurationSelectionView { duration in
+                DurationSelectionView(activityType: .breathwork) { duration in
                     selectedDuration = duration
                     showDurationSelection = false
                     // TODO: Show video player with selected duration

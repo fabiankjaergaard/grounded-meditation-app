@@ -10,6 +10,9 @@ import SwiftUI
 struct HomeView: View {
     // MARK: - Properties
     @StateObject private var viewModel = HomeViewModel()
+    @State private var showActivityTypeSelection = false
+    @State private var showDurationSelection = false
+    @State private var selectedActivityType: ActivityType = .meditation
     @State private var showBreathwork = false
     @State private var showDailyQuote = false
     @State private var showDailyVideo = false
@@ -30,6 +33,27 @@ struct HomeView: View {
             .navigationBarHidden(true)
             .onAppear {
                 viewModel.refreshData()
+            }
+            .sheet(isPresented: $showActivityTypeSelection) {
+                ActivityTypeSelectionView { activityType in
+                    selectedActivityType = activityType
+                    showActivityTypeSelection = false
+                    showDurationSelection = true
+                }
+            }
+            .sheet(isPresented: $showDurationSelection) {
+                DurationSelectionView(activityType: selectedActivityType) { duration in
+                    showDurationSelection = false
+
+                    if selectedActivityType == .breathwork {
+                        // TODO: Use duration for breathwork
+                        breathworkPatternKey = "morning"
+                        showBreathwork = true
+                    } else {
+                        // TODO: Navigate to meditation with selected duration
+                        print("Start meditation for \(duration) minutes")
+                    }
+                }
             }
             .sheet(isPresented: $showBreathwork) {
                 BreathworkView(patternKey: breathworkPatternKey) {
@@ -143,16 +167,13 @@ struct HomeView: View {
     // MARK: - Actions
     private func handleActivityTap(_ activity: Activity) {
         switch activity.type {
-        case .breathwork:
-            breathworkPatternKey = "morning"
-            showBreathwork = true
+        case .breathwork, .meditation:
+            // Show activity type selection for morning activity
+            showActivityTypeSelection = true
         case .quote:
             showDailyQuote = true
         case .video:
             showDailyVideo = true
-        case .meditation:
-            print("Navigate to Meditation: \(activity.id)")
-            // TODO: Navigate to meditation detail
         }
     }
 
