@@ -35,7 +35,8 @@ struct ActivityTypeSelectionView: View {
                     ActivityTypeCard(
                         icon: "sparkles",
                         title: "Meditation",
-                        description: "Lugn och närvaro"
+                        description: "Lugn och närvaro",
+                        backgroundImage: "Card-background-meditation"
                     ) {
                         onSelectType(.meditation)
                     }
@@ -43,7 +44,8 @@ struct ActivityTypeSelectionView: View {
                     ActivityTypeCard(
                         icon: "wind",
                         title: "Breathwork",
-                        description: "Andningsövningar"
+                        description: "Andningsövningar",
+                        backgroundImage: nil
                     ) {
                         onSelectType(.breathwork)
                     }
@@ -76,6 +78,7 @@ struct ActivityTypeCard: View {
     let icon: String
     let title: String
     let description: String
+    let backgroundImage: String?
     let onTap: () -> Void
 
     var body: some View {
@@ -96,21 +99,32 @@ struct ActivityTypeCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(title)
                         .font(Constants.Typography.bodyBold)
-                        .foregroundColor(Constants.Colors.textPrimary)
+                        .foregroundColor(backgroundImage != nil ? .white : Constants.Colors.textPrimary)
 
                     Text(description)
                         .font(Constants.Typography.subheadline)
-                        .foregroundColor(Constants.Colors.textSecondary)
+                        .foregroundColor(backgroundImage != nil ? .white.opacity(0.9) : Constants.Colors.textSecondary)
                 }
 
                 Spacer()
 
                 Image(systemName: Constants.Icons.chevronRight)
-                    .foregroundColor(Constants.Colors.textTertiary)
+                    .foregroundColor(backgroundImage != nil ? .white.opacity(0.7) : Constants.Colors.textTertiary)
             }
             .padding(Constants.Spacing.standard)
-            .background(Color.white)
+            .background(
+                Group {
+                    if let backgroundImage = backgroundImage {
+                        Image(backgroundImage)
+                            .resizable()
+                            .scaledToFill()
+                    } else {
+                        Color.white
+                    }
+                }
+            )
             .cornerRadius(Constants.CornerRadius.card)
+            .clipped()
             .shadow(
                 color: Constants.Shadow.color,
                 radius: Constants.Shadow.radius,
@@ -130,4 +144,28 @@ enum ActivityType {
     ActivityTypeSelectionView { type in
         print("Selected: \(type)")
     }
+}
+
+#Preview("Meditation Card") {
+    VStack {
+        ActivityTypeCard(
+            icon: "sparkles",
+            title: "Meditation",
+            description: "Lugn och närvaro",
+            backgroundImage: "Card-background-meditation"
+        ) {
+            print("Meditation tapped")
+        }
+
+        ActivityTypeCard(
+            icon: "wind",
+            title: "Breathwork",
+            description: "Andningsövningar",
+            backgroundImage: nil
+        ) {
+            print("Breathwork tapped")
+        }
+    }
+    .padding()
+    .background(Constants.Colors.backgroundBeige)
 }
