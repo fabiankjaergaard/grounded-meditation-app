@@ -16,8 +16,6 @@ struct DurationSelectionView: View {
 
     var body: some View {
         VStack(spacing: Constants.Spacing.standard) {
-            Spacer()
-
             // Title
             VStack(spacing: 8) {
                 Text(Strings.DurationSelection.title)
@@ -28,6 +26,7 @@ struct DurationSelectionView: View {
                     .font(Constants.Typography.body)
                     .foregroundColor(Constants.Colors.textSecondary)
             }
+            .padding(.top, 60)
 
             Spacer()
 
