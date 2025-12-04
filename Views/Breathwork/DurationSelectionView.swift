@@ -30,10 +30,9 @@ struct DurationSelectionView: View {
             }
 
             Spacer()
-                .frame(height: 24)
 
             // Duration options
-            VStack(spacing: 12) {
+            VStack(spacing: 20) {
                 ForEach(durations, id: \.self) { duration in
                     DurationCard(duration: duration) {
                         onSelectDuration(duration)
@@ -42,7 +41,6 @@ struct DurationSelectionView: View {
             }
 
             Spacer()
-                .frame(minHeight: 20)
         }
         .padding(Constants.Spacing.standard)
         .background(
@@ -71,7 +69,8 @@ struct DurationCard: View {
 
                 Spacer()
             }
-            .padding(16)
+            .padding(.vertical, 24)
+            .padding(.horizontal, 16)
             .background(Color.white)
             .cornerRadius(Constants.CornerRadius.card)
             .overlay(
