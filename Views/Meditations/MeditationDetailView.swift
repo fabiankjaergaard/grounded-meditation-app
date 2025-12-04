@@ -13,34 +13,35 @@ struct MeditationDetailView: View {
     @State private var showTimer = false
 
     var body: some View {
-        ZStack {
-            Constants.Colors.backgroundBeige
-                .ignoresSafeArea()
+        ScrollView {
+            VStack(spacing: Constants.Spacing.standard) {
+                // Test text
+                Text("TEST - Meditation: \(meditation.title)")
+                    .font(.largeTitle)
+                    .foregroundColor(.red)
 
-            ScrollView {
-                VStack(spacing: Constants.Spacing.standard) {
-                    // Header image/icon
-                    headerSection
+                // Header image/icon
+                headerSection
 
-                    // Title and duration
-                    titleSection
+                // Title and duration
+                titleSection
 
-                    // Description
-                    descriptionSection
+                // Description
+                descriptionSection
 
-                    // Instructions
-                    if meditation.id == "dynamic" {
-                        dynamicInstructionsSection
-                    } else if meditation.id == "kundalini" {
-                        kundaliniInstructionsSection
-                    }
-
-                    // Start button
-                    startButton
+                // Instructions
+                if meditation.id == "dynamic" {
+                    dynamicInstructionsSection
+                } else if meditation.id == "kundalini" {
+                    kundaliniInstructionsSection
                 }
-                .padding(Constants.Spacing.standard)
+
+                // Start button
+                startButton
             }
+            .padding(Constants.Spacing.standard)
         }
+        .background(Constants.Colors.backgroundBeige)
         .navigationTitle(meditation.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -53,6 +54,8 @@ struct MeditationDetailView: View {
         }
         .onAppear {
             print("🎯 MeditationDetailView appeared with meditation: \(meditation.id)")
+            print("📋 Meditation title: \(meditation.title)")
+            print("📋 Meditation description: \(meditation.description)")
         }
     }
 
