@@ -44,15 +44,6 @@ struct DailyActivityCard: View {
 
                 Spacer()
 
-                // Duration
-                Text(activity.duration)
-                    .font(Constants.Typography.caption)
-                    .foregroundColor(
-                        activity.isCompleted
-                        ? Constants.Colors.textTertiary
-                        : Constants.Colors.primaryBlue
-                    )
-
                 // Icon
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
