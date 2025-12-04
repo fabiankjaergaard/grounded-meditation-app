@@ -88,12 +88,12 @@ struct ActivityTypeCard: View {
                     Image(backgroundImage)
                         .resizable()
                         .scaledToFill()
-                        .frame(height: 120)
+                        .frame(height: 160)
                         .clipped()
                 } else {
                     // Empty colored space for breathwork
                     Constants.Colors.primaryBlue.opacity(0.05)
-                        .frame(height: 120)
+                        .frame(height: 160)
                 }
             }
 
@@ -108,7 +108,7 @@ struct ActivityTypeCard: View {
                     .foregroundColor(Constants.Colors.textSecondary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical, 20)
+            .padding(.vertical, 12)
             .padding(.horizontal, Constants.Spacing.standard)
             .background(Color.white)
         }
