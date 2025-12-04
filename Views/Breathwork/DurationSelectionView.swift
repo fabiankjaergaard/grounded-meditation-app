@@ -15,53 +15,43 @@ struct DurationSelectionView: View {
     let durations = [5, 10, 15, 20]
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: Constants.Spacing.standard) {
-                Spacer()
+        VStack(spacing: Constants.Spacing.standard) {
+            Spacer()
 
-                // Title
-                VStack(spacing: 8) {
-                    Text("Välj längd")
-                        .font(Constants.Typography.title)
-                        .foregroundColor(Constants.Colors.textPrimary)
+            // Title
+            VStack(spacing: 8) {
+                Text("Välj längd")
+                    .font(Constants.Typography.title)
+                    .foregroundColor(Constants.Colors.textPrimary)
 
-                    Text(activityType == .meditation ? "Hur länge vill du meditera?" : "Hur länge vill du andas?")
-                        .font(Constants.Typography.body)
-                        .foregroundColor(Constants.Colors.textSecondary)
-                }
-
-                Spacer()
-                    .frame(height: 24)
-
-                // Duration options
-                VStack(spacing: 12) {
-                    ForEach(durations, id: \.self) { duration in
-                        DurationCard(duration: duration) {
-                            onSelectDuration(duration)
-                        }
-                    }
-                }
-
-                Spacer()
-                    .frame(minHeight: 20)
+                Text(activityType == .meditation ? "Hur länge vill du meditera?" : "Hur länge vill du andas?")
+                    .font(Constants.Typography.body)
+                    .foregroundColor(Constants.Colors.textSecondary)
             }
-            .padding(Constants.Spacing.standard)
-            .background(
-                Image("Card-background-meditation")
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
-            )
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: { dismiss() }) {
-                        Image(systemName: "arrow.left")
-                            .foregroundColor(Constants.Colors.textPrimary)
+
+            Spacer()
+                .frame(height: 24)
+
+            // Duration options
+            VStack(spacing: 12) {
+                ForEach(durations, id: \.self) { duration in
+                    DurationCard(duration: duration) {
+                        onSelectDuration(duration)
                     }
                 }
             }
+
+            Spacer()
+                .frame(minHeight: 20)
         }
+        .padding(Constants.Spacing.standard)
+        .background(
+            Image("Card-background-meditation")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+        )
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
