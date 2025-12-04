@@ -48,7 +48,7 @@ struct BreathworkView: View {
                     // TODO: Show video player with selected duration
                     print("Show video for \(duration) minutes")
                     dismiss()
-                }, backgroundImage: "Breathworkbird")
+                }, backgroundImage: "Breathworkcard")
             }
             .fullScreenCover(isPresented: $showInteractive) {
                 InteractiveBreathworkView(patternKey: patternKey) {
