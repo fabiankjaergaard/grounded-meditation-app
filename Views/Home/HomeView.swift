@@ -11,8 +11,6 @@ struct HomeView: View {
     // MARK: - Properties
     @StateObject private var viewModel = HomeViewModel()
     @State private var showActivityTypeSelection = false
-    @State private var showDurationSelection = false
-    @State private var selectedActivityType: ActivityType = .meditation
     @State private var showBreathwork = false
     @State private var showDailyQuote = false
     @State private var showDailyVideo = false
@@ -35,17 +33,8 @@ struct HomeView: View {
                 viewModel.refreshData()
             }
             .sheet(isPresented: $showActivityTypeSelection) {
-                ActivityTypeSelectionView { activityType in
-                    selectedActivityType = activityType
-                    showActivityTypeSelection = false
-                    showDurationSelection = true
-                }
-            }
-            .sheet(isPresented: $showDurationSelection) {
-                DurationSelectionView(activityType: selectedActivityType) { duration in
-                    showDurationSelection = false
-
-                    if selectedActivityType == .breathwork {
+                ActivityTypeSelectionView { activityType, duration in
+                    if activityType == .breathwork {
                         // TODO: Use duration for breathwork
                         breathworkPatternKey = "morning"
                         showBreathwork = true
